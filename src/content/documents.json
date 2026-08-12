@@ -3,8 +3,8 @@
     "id": "cv",
     "title": "Curriculum Vitae",
     "type": "cv",
-    "file_url": "/documents/jordan-ellis-cv.pdf",
-    "description": "Full work history, education, and technical skills. Updated August 2026.",
+    "file_url": "/documents/thanh-vu-cv.pdf",
+    "description": "Education, experience, and skills. Replace the PDF in public/documents/.",
     "sort_order": 1,
     "is_published": true
   },
@@ -12,17 +12,17 @@
     "id": "cover-letter",
     "title": "Cover Letter",
     "type": "cover_letter",
-    "file_url": "/documents/jordan-ellis-cover-letter.pdf",
-    "description": "A general-purpose introduction covering what I look for in a team.",
+    "file_url": "/documents/thanh-vu-cover-letter.pdf",
+    "description": "A tailored introduction for the roles you are applying to.",
     "sort_order": 2,
     "is_published": true
   },
   {
-    "id": "references",
-    "title": "References",
+    "id": "linkedin-profile",
+    "title": "LinkedIn Profile",
     "type": "other",
-    "file_url": "/documents/jordan-ellis-references.pdf",
-    "description": "Contactable references from previous roles, available on request.",
+    "file_url": "/documents/thanh-vu-references.pdf",
+    "description": "A printable snapshot of your LinkedIn profile and its revision history.",
     "sort_order": 3,
     "is_published": true
   }

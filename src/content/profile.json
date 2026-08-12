@@ -1,12 +1,12 @@
 {
-  "_comment": "PLACEHOLDER DATA — replace every value below with your own. See EDITING.md.",
-  "name": "Jordan Ellis",
-  "role": "Senior Software Engineer",
-  "tagline": "Available for new opportunities",
-  "years_experience": 8,
-  "specialty": "Distributed Systems",
-  "summary": "<p>I build precise, performant software with a focus on clean architecture and thoughtful user experiences. Most of my work sits where reliability meets interface design — payment rails, real-time data, and the tooling teams rely on daily.</p><p>Currently open to senior and staff engineering roles.</p>",
-  "email": "jordan.ellis@example.com",
-  "location": "Berlin, Germany",
+  "_comment": "Your details. Only 'name' is filled in for real — replace the rest. See EDITING.md.",
+  "name": "Thanh Vu",
+  "role": "Undergraduate Student",
+  "tagline": "Open to internships and graduate opportunities",
+  "years_experience": 0,
+  "specialty": "Your field of study",
+  "summary": "<p>Replace this with two or three sentences about yourself: what you study, what you are good at, and what kind of role or programme you are looking for. The first 180 characters appear on the home page, so put the important part first.</p>",
+  "email": "your.email@example.com",
+  "location": "",
   "avatar_url": "/images/avatar.svg"
 }

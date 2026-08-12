@@ -18,7 +18,7 @@
   {
     "id": "email",
     "label": "Email",
-    "url": "jordan.ellis@example.com",
+    "url": "your.email@example.com",
     "icon": "email",
     "sort_order": 3,
     "is_published": true
