@@ -19,10 +19,12 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <NavigationRay profile={profile} cvUrl={cvDoc?.file_url} />
-      <Hero profile={profile} />
-      <ProjectCodex projects={projects} />
-      <DocumentHub documents={documents} />
-      <LinkHub links={links} profile={profile} />
+      <main id="main">
+        <Hero profile={profile} />
+        <ProjectCodex projects={projects} />
+        <DocumentHub documents={documents} />
+        <LinkHub links={links} profile={profile} />
+      </main>
       <Footer profile={profile} />
     </div>
   );

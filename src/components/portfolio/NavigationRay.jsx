@@ -1,163 +1,196 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownToLine, Menu, X } from "lucide-react";
-import ThemeToggle from "./ThemeToggle";
+
+const NAV_ITEMS = [
+  { id: "hero", label: "Home" },
+  { id: "work", label: "Work" },
+  { id: "documents", label: "Documents" },
+  { id: "contact", label: "Contact" },
+];
 
 export default function NavigationRay({ profile, cvUrl }) {
   const [activeSection, setActiveSection] = useState("hero");
-  const [scrolled, setScrolled] = useState(false);
-  const [pastProject, setPastProject] = useState(false);
+  const [solid, setSolid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const navItems = [
-    { id: "hero", label: "Home" },
-    { id: "work", label: "Work" },
-    { id: "documents", label: "Documents" },
-    { id: "contact", label: "Contact" },
-  ];
+  // The bar stays transparent only while it overlaps the hero, which supplies
+  // the dark scrim behind it. Anywhere else it sits over ordinary content, so
+  // it goes solid. Pages without a hero start solid.
+  useEffect(() => {
+    const hero = document.getElementById("hero");
+    if (!hero) {
+      setSolid(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setSolid(!entry.isIntersecting),
+      { rootMargin: "-80px 0px 0px 0px" }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // Highlight whichever section currently owns the middle of the viewport.
+  useEffect(() => {
+    const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(Boolean);
+    if (sections.length === 0) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // Lock the page behind the mobile menu while it is open.
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 40);
+    if (!menuOpen) return undefined;
+    const onKeyDown = (e) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
 
-      const workSection = document.getElementById("work");
-      if (workSection) {
-        const rect = workSection.getBoundingClientRect();
-        setPastProject(rect.bottom < window.innerHeight * 0.5);
+  const scrollTo = useCallback(
+    (id) => {
+      setMenuOpen(false);
+      const go = () => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      if (location.pathname !== "/") {
+        navigate("/");
+        // Wait for the home route to mount before looking for the section.
+        requestAnimationFrame(() => requestAnimationFrame(go));
+      } else {
+        go();
       }
-
-      const sections = navItems.map((item) => document.getElementById(item.id));
-      const current = sections.findIndex((section) => {
-        if (!section) return false;
-        const rect = section.getBoundingClientRect();
-        return rect.top <= 120 && rect.bottom >= 120;
-      });
-      if (current !== -1) setActiveSection(navItems[current].id);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollTo = (id) => {
-    setMenuOpen(false);
-    if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      }, 300);
-    } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+    },
+    [location.pathname, navigate]
+  );
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-3xl"
+    <header className={`fixed inset-x-0 top-0 z-50 nav-bar ${solid ? "nav-bar-solid" : ""}`}>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
       >
-        <div
-          className={`glass-nav rounded-full px-3 py-2 flex items-center justify-between gap-2 transition-all duration-500 ${
-            scrolled ? "shadow-2xl shadow-black/5" : ""
-          }`}
+        Skip to content
+      </a>
+
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 md:h-20">
+        <button
+          type="button"
+          onClick={() => scrollTo("hero")}
+          className="-ml-2 rounded-lg px-2 py-2 font-display text-base font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
         >
+          {profile?.name || "Portfolio"}
+          <span className="text-primary">.</span>
+        </button>
+
+        <nav aria-label="Main" className="hidden md:block">
+          <ul className="flex items-center gap-1">
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    onClick={() => scrollTo(item.id)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                      isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          {cvUrl && (
+            <a
+              href={cvUrl}
+              download
+              className="hidden items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:inline-flex"
+            >
+              <ArrowDownToLine className="h-4 w-4" aria-hidden="true" />
+              Download CV
+            </a>
+          )}
+
           <button
-            onClick={() => scrollTo("hero")}
-            className="font-display font-semibold text-sm tracking-tight pl-2 pr-1 text-foreground whitespace-nowrap"
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="-mr-2 flex h-11 w-11 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-secondary md:hidden"
           >
-            {profile?.name?.split(" ")[0] || "Portfolio"}
-            <span className="text-primary">.</span>
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
-
-          <div className="hidden md:flex items-center gap-1 relative">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollTo(item.id)}
-                className="relative px-3 py-1.5 text-xs font-medium rounded-full transition-colors duration-300"
-              >
-                <span
-                  className={
-                    activeSection === item.id
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }
-                >
-                  {item.label}
-                </span>
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="nav-ray"
-                    className="absolute inset-0 rounded-full bg-primary/10 border border-primary/20"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            {cvUrl && (
-              <a
-                href={cvUrl}
-                download
-                className={`hidden sm:flex items-center gap-1.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold px-3.5 py-2 transition-all duration-300 hover:scale-105 ${
-                  pastProject ? "breathing-glow" : ""
-                }`}
-              >
-                <ArrowDownToLine className="h-3.5 w-3.5" />
-                CV
-              </a>
-            )}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden h-9 w-9 rounded-full flex items-center justify-center glass"
-            >
-              {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-            </button>
-          </div>
         </div>
+      </div>
 
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="md:hidden mt-2 glass-strong rounded-2xl p-2 flex flex-col gap-1"
-            >
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className="text-left px-4 py-2.5 text-sm font-medium rounded-xl hover:bg-primary/10 transition-colors"
-                >
-                  {item.label}
-                </button>
-              ))}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            id="mobile-menu"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="border-t border-border bg-background/95 backdrop-blur-xl md:hidden"
+          >
+            <nav aria-label="Mobile" className="mx-auto max-w-6xl px-4 py-4 sm:px-6">
+              <ul className="flex flex-col gap-1">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      onClick={() => scrollTo(item.id)}
+                      className={`w-full rounded-lg px-4 py-3 text-left text-base font-medium transition-colors ${
+                        activeSection === item.id
+                          ? "bg-primary/10 text-primary"
+                          : "text-foreground hover:bg-secondary"
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
               {cvUrl && (
                 <a
                   href={cvUrl}
                   download
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl bg-primary text-primary-foreground"
+                  onClick={() => setMenuOpen(false)}
+                  className="mt-3 flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                 >
-                  <ArrowDownToLine className="h-4 w-4" />
+                  <ArrowDownToLine className="h-4 w-4" aria-hidden="true" />
                   Download CV
                 </a>
               )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
-    </>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }
