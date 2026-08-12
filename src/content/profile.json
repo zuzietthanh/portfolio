@@ -1,0 +1,12 @@
+{
+  "_comment": "PLACEHOLDER DATA — replace every value below with your own. See EDITING.md.",
+  "name": "Jordan Ellis",
+  "role": "Senior Software Engineer",
+  "tagline": "Available for new opportunities",
+  "years_experience": 8,
+  "specialty": "Distributed Systems",
+  "summary": "<p>I build precise, performant software with a focus on clean architecture and thoughtful user experiences. Most of my work sits where reliability meets interface design — payment rails, real-time data, and the tooling teams rely on daily.</p><p>Currently open to senior and staff engineering roles.</p>",
+  "email": "jordan.ellis@example.com",
+  "location": "Berlin, Germany",
+  "avatar_url": "/images/avatar.svg"
+}

@@ -1,46 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Github, ExternalLink, ArrowDownToLine, Calendar, User as UserIcon } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { ArrowLeft, Github, ExternalLink, ArrowDownToLine } from "lucide-react";
+import { getProfile, getProject, getDocuments } from "@/lib/content";
 import { Image } from "@/components/ui/image";
 import NavigationRay from "@/components/portfolio/NavigationRay";
 
 export default function ProjectDetail() {
   const { id } = useParams();
-  const [project, setProject] = useState(null);
-  const [profile, setProfile] = useState(null);
-  const [documents, setDocuments] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+  // Content is imported at build time — resolved synchronously on first render.
+  const project = getProject(id);
+  const profile = getProfile();
+  const documents = getDocuments();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const fetchData = async () => {
-      try {
-        const [proj, profiles, docs] = await Promise.all([
-          base44.entities.Project.get(id),
-          base44.entities.Profile.list(),
-          base44.entities.Document.list("sort_order", 50),
-        ]);
-        setProject(proj);
-        setProfile(profiles[0]);
-        setDocuments(docs);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
   }, [id]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
-      </div>
-    );
-  }
 
   if (!project) {
     return (

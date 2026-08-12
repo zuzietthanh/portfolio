@@ -1,0 +1,29 @@
+[
+  {
+    "id": "cv",
+    "title": "Curriculum Vitae",
+    "type": "cv",
+    "file_url": "/documents/jordan-ellis-cv.pdf",
+    "description": "Full work history, education, and technical skills. Updated August 2026.",
+    "sort_order": 1,
+    "is_published": true
+  },
+  {
+    "id": "cover-letter",
+    "title": "Cover Letter",
+    "type": "cover_letter",
+    "file_url": "/documents/jordan-ellis-cover-letter.pdf",
+    "description": "A general-purpose introduction covering what I look for in a team.",
+    "sort_order": 2,
+    "is_published": true
+  },
+  {
+    "id": "references",
+    "title": "References",
+    "type": "other",
+    "file_url": "/documents/jordan-ellis-references.pdf",
+    "description": "Contactable references from previous roles, available on request.",
+    "sort_order": 3,
+    "is_published": true
+  }
+]
