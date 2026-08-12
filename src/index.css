@@ -4,94 +4,38 @@
 
 /* ---------------------------------------------------------------------------
    Refractive Precision — obsidian ground, luminous cobalt accent, layered
-   glass surfaces. Dark is the default theme; index.html applies the `dark`
-   class before first paint so there is no flash.
+   glass surfaces.
 
-   Colors are stored as bare HSL triplets because tailwind.config.js wraps
-   them: hsl(var(--background)). Do not add hsl() here.
+   Dark only. There is no light theme: the hero's readability depends on light
+   text over a dark scrim, which does not survive being inverted. index.html
+   hardcodes class="dark" on <html> so Tailwind's `dark:` variants still
+   resolve, but every token below is defined on :root and never changes.
+
+   Colors are bare HSL triplets because tailwind.config.js wraps them:
+   hsl(var(--background)). Do not add hsl() here.
 --------------------------------------------------------------------------- */
 
 @layer base {
   :root {
-    /* Light theme — the toggle's second state. */
-    --background: 220 33% 98%;
-    --foreground: 225 28% 11%;
+    /* Obsidian — a blue-black ground, never neutral grey, never pure black. */
+    --background: 225 24% 6%;      /* #0C0D13 */
+    --foreground: 220 22% 96%;     /* #F3F4F7 — 17.6:1 on background */
 
-    --card: 0 0% 100%;
-    --card-foreground: 225 28% 11%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 225 28% 11%;
-
-    --primary: 219 89% 44%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 20% 94%;
-    --secondary-foreground: 225 25% 16%;
-
-    --muted: 220 20% 94%;
-    --muted-foreground: 225 13% 36%;
-
-    --accent: 219 60% 94%;
-    --accent-foreground: 219 89% 32%;
-
-    --destructive: 0 72% 44%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 16% 86%;
-    --input: 220 16% 86%;
-    --ring: 219 89% 44%;
-
-    --chart-1: 219 89% 44%;
-    --chart-2: 190 80% 38%;
-    --chart-3: 265 65% 55%;
-    --chart-4: 32 85% 48%;
-    --chart-5: 155 60% 36%;
-
-    --sidebar-background: 220 33% 98%;
-    --sidebar-foreground: 225 28% 11%;
-    --sidebar-primary: 219 89% 44%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 20% 94%;
-    --sidebar-accent-foreground: 225 25% 16%;
-    --sidebar-border: 220 16% 86%;
-    --sidebar-ring: 219 89% 44%;
-
-    --radius: 0.75rem;
-
-    /* Glass surfaces are tinted from the foreground colour, so one set of
-       rules reads correctly in both themes. */
-    --glass-bg: 225 28% 11% / 0.04;
-    --glass-bg-strong: 225 28% 11% / 0.07;
-    --glass-border: 225 28% 11% / 0.1;
-    --glass-blur: 14px;
-
-    --font-display: "Clash Display", "Geist", ui-sans-serif, system-ui, sans-serif;
-    --font-heading: "Clash Display", "Geist", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
-    --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  }
-
-  .dark {
-    /* Obsidian — a blue-black ground, never neutral grey. */
-    --background: 225 24% 6%;
-    --foreground: 220 22% 96%;
-
-    --card: 225 20% 9%;
+    --card: 225 20% 9%;            /* #12151C */
     --card-foreground: 220 22% 96%;
 
     --popover: 225 20% 9%;
     --popover-foreground: 220 22% 96%;
 
-    /* Luminous cobalt — bright enough to read as a light source on obsidian. */
-    --primary: 219 92% 64%;
+    /* Luminous cobalt — the single accent. 5.8:1 as text on the ground. */
+    --primary: 219 92% 64%;        /* #4F8AF8 */
     --primary-foreground: 225 40% 7%;
 
-    --secondary: 225 16% 14%;
+    --secondary: 225 16% 14%;      /* #1E2129 */
     --secondary-foreground: 220 20% 93%;
 
     --muted: 225 16% 14%;
-    --muted-foreground: 220 16% 74%;
+    --muted-foreground: 220 16% 74%;   /* #B2B9C7 — 9.8:1, not the usual grey-on-grey */
 
     --accent: 225 18% 17%;
     --accent-foreground: 220 22% 96%;
@@ -99,8 +43,11 @@
     --destructive: 0 74% 60%;
     --destructive-foreground: 225 40% 7%;
 
-    --border: 222 16% 20%;
-    --input: 222 16% 22%;
+    /* Decorative dividers stay faint (1.46:1 — exempt as decoration).
+       --input is deliberately brighter: on a form field the border is the
+       only thing marking where to type, so it owes the 3:1 UI minimum. */
+    --border: 222 16% 20%;         /* #2B303B */
+    --input: 222 14% 34%;          /* #4A5162 — 3.2:1 on background */
     --ring: 219 92% 64%;
 
     --chart-1: 219 92% 64%;
@@ -118,13 +65,29 @@
     --sidebar-border: 222 16% 20%;
     --sidebar-ring: 219 92% 64%;
 
+    --radius: 0.75rem;
+
+    /* Supporting hues — background graphic only, never text or controls. */
+    --violet: 249 78% 68%;         /* #7C6BF0 */
+    --teal: 178 62% 48%;           /* #2EC5C0 */
+
     --glass-bg: 220 22% 96% / 0.045;
     --glass-bg-strong: 220 22% 96% / 0.085;
     --glass-border: 220 22% 96% / 0.1;
+    --glass-blur: 14px;
+
+    --font-display: "Clash Display", "Geist", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Clash Display", "Geist", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
 
   * {
     @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -132,24 +95,25 @@
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* The hero bleeds to the viewport edges; nothing should scroll sideways. */
+    overflow-x: hidden;
   }
 
-  /* Clash Display carries every heading and display number. */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
   }
 
-  /* A visible keyboard focus ring everywhere, on the obsidian ground. */
+  /* One visible keyboard focus ring, everywhere. */
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
 @layer components {
-  /* Layered glass — a translucent plate over the ambient gradient orbs.
-     backdrop-filter is what makes the layering read; the background tint
-     alone looks flat. */
+  /* --- Glass surfaces ---------------------------------------------------- */
+
   .glass {
     background-color: hsl(var(--glass-bg));
     border: 1px solid hsl(var(--glass-border));
@@ -164,16 +128,6 @@
     -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.4));
   }
 
-  /* The floating navigation pill sits above content and needs a heavier
-     blur to stay legible over whatever scrolls beneath it. */
-  .glass-nav {
-    background-color: hsl(var(--background) / 0.72);
-    border: 1px solid hsl(var(--glass-border));
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-  }
-
-  /* Cobalt-tinted glass for accent chips and icon wells. */
   .glass-primary {
     background-color: hsl(var(--primary) / 0.12);
     border: 1px solid hsl(var(--primary) / 0.22);
@@ -181,23 +135,104 @@
     -webkit-backdrop-filter: blur(var(--glass-blur));
   }
 
-  /* Fine-grained noise over the hero, so the large flat obsidian field and
-     the blurred orbs don't band on wide gradients. */
-  .noise-bg::before {
-    content: "";
+  /* --- Hero background --------------------------------------------------- */
+
+  /* Layer 1: three soft colour fields that drift on their own timers. Kept
+     deliberately calm and low-contrast — a busy hero background is the exact
+     failure mode this treatment exists to avoid. */
+  .hero-aurora {
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    will-change: transform;
+  }
+
+  .hero-orb-1 {
+    width: 46vw; height: 46vw;
+    min-width: 320px; min-height: 320px;
+    top: 6%; left: 2%;
+    background: hsl(var(--primary) / 0.5);
+    animation: hero-drift-1 26s ease-in-out infinite;
+  }
+
+  .hero-orb-2 {
+    width: 40vw; height: 40vw;
+    min-width: 280px; min-height: 280px;
+    bottom: 4%; right: 0%;
+    background: hsl(var(--violet) / 0.42);
+    animation: hero-drift-2 32s ease-in-out infinite;
+  }
+
+  .hero-orb-3 {
+    width: 26vw; height: 26vw;
+    min-width: 200px; min-height: 200px;
+    top: 42%; right: 24%;
+    background: hsl(var(--teal) / 0.26);
+    animation: hero-drift-3 22s ease-in-out infinite;
+  }
+
+  /* Layer 2: the dark scrim. Strongest at the very top so the transparent
+     nav always has something dark behind it, and again at the bottom so the
+     hero dissolves into the page instead of ending on a hard edge. */
+  .hero-scrim {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.035;
+    background:
+      linear-gradient(
+        to bottom,
+        hsl(var(--background) / 0.86) 0%,
+        hsl(var(--background) / 0.52) 22%,
+        hsl(var(--background) / 0.48) 62%,
+        hsl(var(--background) / 0.92) 92%,
+        hsl(var(--background)) 100%
+      );
+  }
+
+  /* Fine grain over the whole hero — stops the large blurred fields from
+     banding into visible stripes on wide screens. */
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
+  /* --- Navigation -------------------------------------------------------- */
+
+  /* Transparent over the hero: no background, no border, no seam. */
+  .nav-bar {
+    transition: background-color 400ms ease, border-color 400ms ease,
+                backdrop-filter 400ms ease;
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+  }
+
+  /* Past the hero the bar sits over ordinary content, where transparent text
+     would land on whatever happens to scroll under it. Going solid here is
+     the contrast rule, not a stylistic flourish. */
+  .nav-bar-solid {
+    background-color: hsl(var(--background) / 0.82);
+    border-bottom-color: hsl(var(--border));
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+  }
+
+  /* Both stops stay bright: cobalt is 5.8:1 and the foreground 17.6:1, so the
+     sheen never dips below AA no matter where a glyph lands in the ramp.
+     A third, dimmer stop made short words like a two-letter surname fade out. */
   .text-gradient {
     background-image: linear-gradient(
-      135deg,
+      115deg,
       hsl(var(--primary)) 0%,
-      hsl(var(--foreground)) 55%,
-      hsl(var(--primary) / 0.8) 100%
+      hsl(var(--foreground)) 72%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -209,27 +244,41 @@
   }
 }
 
-@keyframes breathing-glow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.45);
-  }
-  50% {
-    box-shadow: 0 0 22px 4px hsl(var(--primary) / 0.32);
-  }
+@keyframes hero-drift-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(6%, 8%, 0) scale(1.12); }
 }
 
-/* Non-essential motion is decoration; honour the OS setting. */
+@keyframes hero-drift-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(-7%, -6%, 0) scale(0.92); }
+}
+
+@keyframes hero-drift-3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(4%, -9%, 0) scale(1.08); }
+}
+
+@keyframes breathing-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.45); }
+  50%      { box-shadow: 0 0 22px 4px hsl(var(--primary) / 0.32); }
+}
+
+/* Decoration is optional; the OS setting wins. The orbs hold their position
+   rather than disappearing, so the hero keeps its composition. */
 @media (prefers-reduced-motion: reduce) {
+  .hero-orb,
   .breathing-glow {
-    animation: none;
+    animation: none !important;
   }
 
-  *,
-  *::before,
-  *::after {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

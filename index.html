@@ -1,22 +1,21 @@
 <!doctype html>
-<html lang="en">
+<!-- Dark only. The class is hardcoded rather than applied by script so the
+     correct theme is present in the very first paint, and so Tailwind's
+     `dark:` variants keep resolving. There is no toggle. -->
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio — Career Command Center. Projects, documents, and professional links for a software engineer." />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0C0D13" />
+    <meta name="description" content="Thanh Vu — professional portfolio. Statement of purpose, CV, cover letter, and selected work." />
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <title>Portfolio · Career Command Center</title>
-    <script>
-      (function() {
-        var theme = localStorage.getItem('theme') || 'dark';
-        if (theme === 'dark') document.documentElement.classList.add('dark');
-      })();
-    </script>
+    <title>Thanh Vu · Professional Portfolio</title>
   </head>
   <body>
     <div id="root"></div>
