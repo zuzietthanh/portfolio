@@ -1,0 +1,65 @@
+{
+  "name": "Profile",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name"
+    },
+    "role": {
+      "type": "string",
+      "title": "Role"
+    },
+    "tagline": {
+      "type": "string",
+      "title": "Tagline"
+    },
+    "years_experience": {
+      "type": "number",
+      "title": "Years of Experience"
+    },
+    "specialty": {
+      "type": "string",
+      "title": "Specialty"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Summary",
+      "input_type": "richtext"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "location": {
+      "type": "string",
+      "title": "Location"
+    },
+    "avatar_url": {
+      "type": "string",
+      "title": "Avatar",
+      "input_type": "imageurl"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

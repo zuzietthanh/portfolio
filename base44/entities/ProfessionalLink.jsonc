@@ -1,0 +1,71 @@
+{
+  "name": "ProfessionalLink",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "title": "Label"
+    },
+    "url": {
+      "type": "string",
+      "title": "URL"
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "linkedin",
+        "github",
+        "twitter",
+        "email",
+        "globe",
+        "dribbble",
+        "medium"
+      ],
+      "default": "globe",
+      "title": "Icon"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "is_published": {
+      "type": "boolean",
+      "default": true,
+      "title": "Published"
+    }
+  },
+  "required": [
+    "label",
+    "url"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.is_published": true
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
