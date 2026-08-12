@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
 
 export default function Footer({ profile }) {
   const year = new Date().getFullYear();
@@ -20,11 +19,6 @@ export default function Footer({ profile }) {
             </span>
             <span className="text-border">·</span>
             <span>© {year}</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            Built with
-            <Heart className="h-3 w-3 text-primary fill-primary" />
-            and precision
           </div>
         </motion.div>
       </div>

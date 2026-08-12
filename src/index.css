@@ -237,6 +237,16 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+
+    /* The gradient is clipped to this element's box, and an italic glyph's ink
+       leans past the right edge of its advance width — so the overhang gets no
+       paint and the last letter looks sliced off. Widening the box past the
+       lean fixes it; the negative margin keeps the visual spacing unchanged.
+       inline-block so the padding applies to a single box rather than being
+       split across line fragments. */
+    display: inline-block;
+    padding-right: 0.14em;
+    margin-right: -0.14em;
   }
 
   .breathing-glow {
