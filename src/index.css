@@ -1,70 +1,235 @@
-import { Toaster } from "@/components/ui/toaster"
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import PageNotFound from './lib/PageNotFound';
-import { AuthProvider, useAuth } from '@/lib/AuthContext';
-import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-import ScrollToTop from './components/ScrollToTop';
-// Add page imports here
-import Home from './pages/Home';
-import ProjectDetail from './pages/ProjectDetail';
-import Admin from './pages/Admin';
-import Login from '@/pages/Login';
-import ProtectedRoute from '@/components/ProtectedRoute';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
+/* ---------------------------------------------------------------------------
+   Refractive Precision — obsidian ground, luminous cobalt accent, layered
+   glass surfaces. Dark is the default theme; index.html applies the `dark`
+   class before first paint so there is no flash.
 
-  // Show loading spinner while checking app public settings or auth
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
-      </div>
-    );
+   Colors are stored as bare HSL triplets because tailwind.config.js wraps
+   them: hsl(var(--background)). Do not add hsl() here.
+--------------------------------------------------------------------------- */
+
+@layer base {
+  :root {
+    /* Light theme — the toggle's second state. */
+    --background: 220 33% 98%;
+    --foreground: 225 28% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 225 28% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 225 28% 11%;
+
+    --primary: 219 89% 44%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 20% 94%;
+    --secondary-foreground: 225 25% 16%;
+
+    --muted: 220 20% 94%;
+    --muted-foreground: 225 13% 36%;
+
+    --accent: 219 60% 94%;
+    --accent-foreground: 219 89% 32%;
+
+    --destructive: 0 72% 44%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 16% 86%;
+    --input: 220 16% 86%;
+    --ring: 219 89% 44%;
+
+    --chart-1: 219 89% 44%;
+    --chart-2: 190 80% 38%;
+    --chart-3: 265 65% 55%;
+    --chart-4: 32 85% 48%;
+    --chart-5: 155 60% 36%;
+
+    --sidebar-background: 220 33% 98%;
+    --sidebar-foreground: 225 28% 11%;
+    --sidebar-primary: 219 89% 44%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 94%;
+    --sidebar-accent-foreground: 225 25% 16%;
+    --sidebar-border: 220 16% 86%;
+    --sidebar-ring: 219 89% 44%;
+
+    --radius: 0.75rem;
+
+    /* Glass surfaces are tinted from the foreground colour, so one set of
+       rules reads correctly in both themes. */
+    --glass-bg: 225 28% 11% / 0.04;
+    --glass-bg-strong: 225 28% 11% / 0.07;
+    --glass-border: 225 28% 11% / 0.1;
+    --glass-blur: 14px;
+
+    --font-display: "Clash Display", "Geist", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Clash Display", "Geist", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
 
-  // Handle authentication errors
-  if (authError) {
-    if (authError.type === 'user_not_registered') {
-      return <UserNotRegisteredError />;
-    } else if (authError.type === 'auth_required') {
-      // Redirect to login automatically
-      navigateToLogin();
-      return null;
-    }
+  .dark {
+    /* Obsidian — a blue-black ground, never neutral grey. */
+    --background: 225 24% 6%;
+    --foreground: 220 22% 96%;
+
+    --card: 225 20% 9%;
+    --card-foreground: 220 22% 96%;
+
+    --popover: 225 20% 9%;
+    --popover-foreground: 220 22% 96%;
+
+    /* Luminous cobalt — bright enough to read as a light source on obsidian. */
+    --primary: 219 92% 64%;
+    --primary-foreground: 225 40% 7%;
+
+    --secondary: 225 16% 14%;
+    --secondary-foreground: 220 20% 93%;
+
+    --muted: 225 16% 14%;
+    --muted-foreground: 220 16% 74%;
+
+    --accent: 225 18% 17%;
+    --accent-foreground: 220 22% 96%;
+
+    --destructive: 0 74% 60%;
+    --destructive-foreground: 225 40% 7%;
+
+    --border: 222 16% 20%;
+    --input: 222 16% 22%;
+    --ring: 219 92% 64%;
+
+    --chart-1: 219 92% 64%;
+    --chart-2: 190 85% 55%;
+    --chart-3: 265 75% 70%;
+    --chart-4: 32 90% 62%;
+    --chart-5: 155 65% 52%;
+
+    --sidebar-background: 225 20% 8%;
+    --sidebar-foreground: 220 22% 96%;
+    --sidebar-primary: 219 92% 64%;
+    --sidebar-primary-foreground: 225 40% 7%;
+    --sidebar-accent: 225 18% 17%;
+    --sidebar-accent-foreground: 220 22% 96%;
+    --sidebar-border: 222 16% 20%;
+    --sidebar-ring: 219 92% 64%;
+
+    --glass-bg: 220 22% 96% / 0.045;
+    --glass-bg-strong: 220 22% 96% / 0.085;
+    --glass-border: 220 22% 96% / 0.1;
   }
 
-  // Render the main app
-  return (
-    <Routes>
-      {/* Add your page Route elements here */}
-      <Route path="/" element={<Home />} />
-      <Route path="/project/:id" element={<ProjectDetail />} />
-      <Route path="/login" element={<Login />} />
-      <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
-        <Route path="/admin" element={<Admin />} />
-      </Route>
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
-  );
-};
+  * {
+    @apply border-border;
+  }
 
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-function App() {
+  /* Clash Display carries every heading and display number. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
 
-  return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <ScrollToTop />
-          <AuthenticatedApp />
-        </Router>
-        <Toaster />
-      </QueryClientProvider>
-    </AuthProvider>
-  )
+  /* A visible keyboard focus ring everywhere, on the obsidian ground. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
 }
 
-export default App
+@layer components {
+  /* Layered glass — a translucent plate over the ambient gradient orbs.
+     backdrop-filter is what makes the layering read; the background tint
+     alone looks flat. */
+  .glass {
+    background-color: hsl(var(--glass-bg));
+    border: 1px solid hsl(var(--glass-border));
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+
+  .glass-strong {
+    background-color: hsl(var(--glass-bg-strong));
+    border: 1px solid hsl(var(--glass-border));
+    backdrop-filter: blur(calc(var(--glass-blur) * 1.4));
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.4));
+  }
+
+  /* The floating navigation pill sits above content and needs a heavier
+     blur to stay legible over whatever scrolls beneath it. */
+  .glass-nav {
+    background-color: hsl(var(--background) / 0.72);
+    border: 1px solid hsl(var(--glass-border));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  /* Cobalt-tinted glass for accent chips and icon wells. */
+  .glass-primary {
+    background-color: hsl(var(--primary) / 0.12);
+    border: 1px solid hsl(var(--primary) / 0.22);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+
+  /* Fine-grained noise over the hero, so the large flat obsidian field and
+     the blurred orbs don't band on wide gradients. */
+  .noise-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--foreground)) 55%,
+      hsl(var(--primary) / 0.8) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .breathing-glow {
+    animation: breathing-glow 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes breathing-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.45);
+  }
+  50% {
+    box-shadow: 0 0 22px 4px hsl(var(--primary) / 0.32);
+  }
+}
+
+/* Non-essential motion is decoration; honour the OS setting. */
+@media (prefers-reduced-motion: reduce) {
+  .breathing-glow {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

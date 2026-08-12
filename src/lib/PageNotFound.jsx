@@ -1,33 +1,23 @@
-// Shared by the auth pages (Login, Register, and any page that resumes a flow
-// after sign-in, e.g. the MCP OAuth consent page). Keep the redirect
-// validation in one place — it is security-sensitive and easy to drift.
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
-// Resolve ?returnTo= to a safe same-origin path, else "/".
-//
-// The same-origin check alone is not enough: a value like /.//evil.com or
-// /\evil.com parses same-origin but normalizes to a protocol-relative
-// //evil.com when assigned to location.href — an open redirect. So require the
-// resolved path to be exactly one leading slash (no "//" prefix, no backslash).
-export function safeReturnTo() {
-  const raw = new URLSearchParams(window.location.search).get("returnTo");
-  if (!raw) return "/";
-  try {
-    const url = new URL(raw, window.location.origin);
-    if (url.origin !== window.location.origin) return "/";
-    // Strip app-bootstrap params: app-params.js persists these from the URL into
-    // localStorage before the SDK initializes, so a crafted returnTo could
-    // otherwise poison the freshly issued session — repointing the app at an
-    // attacker's backend (app_base_url/app_id/functions_version) or overwriting
-    // the token. Normal app-flow params (e.g. the OAuth consent ctx) are kept.
-    // The full app-params.js bootstrap set (src/lib/app-params.js) — any of
-    // these in a crafted returnTo would be persisted at next load.
-    for (const p of ["access_token", "clear_access_token", "app_id", "app_base_url", "functions_version", "from_url"]) {
-      url.searchParams.delete(p);
-    }
-    const path = url.pathname + url.search;
-    if (!path.startsWith("/") || path.startsWith("//") || path.includes("\\")) return "/";
-    return path;
-  } catch {
-    return "/";
-  }
+export default function PageNotFound() {
+  return (
+    <main className="min-h-screen flex flex-col items-center justify-center gap-6 px-6 text-center">
+      <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">404</p>
+      <h1 className="font-display text-3xl md:text-5xl font-medium tracking-tight text-foreground">
+        This page doesn't exist
+      </h1>
+      <p className="text-muted-foreground max-w-md">
+        The link may be out of date, or the page may have been renamed.
+      </p>
+      <Link
+        to="/"
+        className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground text-sm font-semibold px-6 py-3 transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back home
+      </Link>
+    </main>
+  );
 }
