@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Sparkles } from "lucide-react";
-import { Image } from "@/components/ui/image";
 
 export default function Hero({ profile }) {
   const stats = [

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
+import { motion, useSpring, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 
 function ProjectPlate({ project, index }) {
