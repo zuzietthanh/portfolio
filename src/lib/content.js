@@ -13,6 +13,7 @@ import profileData from "@/content/profile.json";
 import projectsData from "@/content/projects.json";
 import documentsData from "@/content/documents.json";
 import linksData from "@/content/links.json";
+import statementData from "@/content/statement.json";
 
 /** Content files describing a list must parse to an array. */
 function asList(value, filename) {
@@ -64,4 +65,25 @@ export function getDocuments() {
 
 export function getLinks() {
   return publishedSorted(linksData, "links.json");
+}
+
+/**
+ * The statement of purpose. Its three sections are required by the
+ * assignment, so a missing `sections` array is a content error worth
+ * surfacing rather than rendering an empty page over.
+ */
+export function getStatement() {
+  const statement =
+    statementData && typeof statementData === "object" && !Array.isArray(statementData)
+      ? statementData
+      : {};
+
+  if (!statement.title) {
+    console.error("[content] src/content/statement.json is missing a \"title\".");
+  }
+
+  return {
+    ...statement,
+    sections: asList(statement.sections ?? [], "statement.json (sections)"),
+  };
 }

@@ -1,0 +1,27 @@
+{
+  "_comment": "Your Statement of Purpose. The three sections below are the three things the assignment requires — keep all three, replace the text inside each. Basic HTML works: <p>, <strong>, <em>, <ul>, <li>.",
+  "title": "Statement of Purpose",
+  "eyebrow": "Required Artifact",
+  "intro": "A short reflection on where I am heading, what I chose to put in this portfolio, and why those pieces matter.",
+  "last_updated": "August 2026",
+  "sections": [
+    {
+      "id": "goals",
+      "heading": "My goals",
+      "summary": "Short-term and long-term, professional and academic.",
+      "body": "<p>PLACEHOLDER — replace this with your own writing.</p><p>Write about where you want to be in the next year or two: the kind of marketing internship or graduate role you are aiming for, and the specific skills you want to build (for example brand strategy, campaign analytics, or content production).</p><p>Then write about the longer term: the kind of marketer you want to become, the industry or type of organisation you want to work in, and any further study you are considering.</p><p><strong>Be specific.</strong> \"I want to work in marketing\" says very little. \"I want to work on brand campaigns for sustainable consumer goods, because…\" says a lot.</p>"
+    },
+    {
+      "id": "overview",
+      "heading": "Why these documents",
+      "summary": "The package I chose and what each piece is doing here.",
+      "body": "<p>PLACEHOLDER — replace this with your own writing.</p><p>Explain that you chose the <strong>Job Seeking</strong> package, and why that fits where you are right now rather than the Study Exchange route.</p><p>Then take each of the three documents in turn — your CV, your cover letter, and your LinkedIn profile — and say what each one is meant to show about you that the others do not. A grader is looking for evidence that you chose deliberately, not that you filled three slots.</p><p>Mention what changed between drafts, and what a piece of peer feedback made you rethink.</p>"
+    },
+    {
+      "id": "future",
+      "heading": "How this connects to my future",
+      "summary": "The link between these artifacts and where I am going.",
+      "body": "<p>PLACEHOLDER — replace this with your own writing.</p><p>Tie the two sections above together. How do these specific documents move you toward the goals you described? What will you do with them after this class — which roles will you actually apply to, and what still needs work before you do?</p><p>This is the reflective part, so it is fine to name a weakness. Writing \"my CV still leans on coursework because I have limited industry experience, so my next step is…\" reads as self-aware, not as a gap.</p>"
+    }
+  ]
+}

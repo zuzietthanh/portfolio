@@ -1,6 +1,7 @@
-import { getProfile, getProjects, getDocuments, getLinks } from "@/lib/content";
+import { getProfile, getProjects, getDocuments, getLinks, getStatement } from "@/lib/content";
 import NavigationRay from "@/components/portfolio/NavigationRay";
 import Hero from "@/components/portfolio/Hero";
+import StatementCallout from "@/components/portfolio/StatementCallout";
 import ProjectCodex from "@/components/portfolio/ProjectCodex";
 import DocumentHub from "@/components/portfolio/DocumentHub";
 import LinkHub from "@/components/portfolio/LinkHub";
@@ -13,6 +14,7 @@ export default function Home() {
   const projects = getProjects();
   const documents = getDocuments();
   const links = getLinks();
+  const statement = getStatement();
 
   const cvDoc = documents.find((d) => d.type === "cv");
 
@@ -21,8 +23,11 @@ export default function Home() {
       <NavigationRay profile={profile} cvUrl={cvDoc?.file_url} />
       <main id="main">
         <Hero profile={profile} />
-        <ProjectCodex projects={projects} />
+        {/* Required coursework leads: statement, then documents. The work grid
+            is optional to the brief, so it follows them. */}
+        <StatementCallout statement={statement} />
         <DocumentHub documents={documents} />
+        <ProjectCodex projects={projects} />
         <LinkHub links={links} profile={profile} />
       </main>
       <Footer profile={profile} />

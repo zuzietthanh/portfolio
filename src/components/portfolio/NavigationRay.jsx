@@ -1,14 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownToLine, Menu, X } from "lucide-react";
 
+// The statement of purpose is a page of its own; everything else is a section
+// of the home page. Required coursework leads, so it sits directly after Home
+// and the optional work grid moves below the documents.
 const NAV_ITEMS = [
-  { id: "hero", label: "Home" },
-  { id: "work", label: "Work" },
-  { id: "documents", label: "Documents" },
-  { id: "contact", label: "Contact" },
+  { kind: "section", id: "hero", label: "Home" },
+  { kind: "route", to: "/statement-of-purpose", label: "Statement" },
+  { kind: "section", id: "documents", label: "Documents" },
+  { kind: "section", id: "work", label: "Work" },
+  { kind: "section", id: "contact", label: "Contact" },
 ];
+
+const SECTION_IDS = NAV_ITEMS.filter((item) => item.kind === "section").map((item) => item.id);
 
 export default function NavigationRay({ profile, cvUrl }) {
   const [activeSection, setActiveSection] = useState("hero");
@@ -36,7 +42,7 @@ export default function NavigationRay({ profile, cvUrl }) {
 
   // Highlight whichever section currently owns the middle of the viewport.
   useEffect(() => {
-    const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(Boolean);
+    const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean);
     if (sections.length === 0) return undefined;
 
     const observer = new IntersectionObserver(
@@ -82,6 +88,12 @@ export default function NavigationRay({ profile, cvUrl }) {
     [location.pathname, navigate]
   );
 
+  // A route item is active by URL; a section item only while its page is shown.
+  const isItemActive = (item) =>
+    item.kind === "route"
+      ? location.pathname === item.to
+      : location.pathname === "/" && activeSection === item.id;
+
   return (
     <header className={`fixed inset-x-0 top-0 z-50 nav-bar ${solid ? "nav-bar-solid" : ""}`}>
       <a
@@ -104,19 +116,30 @@ export default function NavigationRay({ profile, cvUrl }) {
         <nav aria-label="Main" className="hidden md:block">
           <ul className="flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
-              const isActive = activeSection === item.id;
+              const isActive = isItemActive(item);
+              const className = `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`;
               return (
-                <li key={item.id}>
-                  <button
-                    type="button"
-                    onClick={() => scrollTo(item.id)}
-                    aria-current={isActive ? "true" : undefined}
-                    className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                      isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
+                <li key={item.label}>
+                  {item.kind === "route" ? (
+                    <Link
+                      to={item.to}
+                      aria-current={isActive ? "page" : undefined}
+                      className={className}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => scrollTo(item.id)}
+                      aria-current={isActive ? "true" : undefined}
+                      className={className}
+                    >
+                      {item.label}
+                    </button>
+                  )}
                 </li>
               );
             })}
@@ -160,21 +183,35 @@ export default function NavigationRay({ profile, cvUrl }) {
           >
             <nav aria-label="Mobile" className="mx-auto max-w-6xl px-4 py-4 sm:px-6">
               <ul className="flex flex-col gap-1">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.id}>
-                    <button
-                      type="button"
-                      onClick={() => scrollTo(item.id)}
-                      className={`w-full rounded-lg px-4 py-3 text-left text-base font-medium transition-colors ${
-                        activeSection === item.id
-                          ? "bg-primary/10 text-primary"
-                          : "text-foreground hover:bg-secondary"
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  </li>
-                ))}
+                {NAV_ITEMS.map((item) => {
+                  const isActive = isItemActive(item);
+                  const className = `block w-full rounded-lg px-4 py-3 text-left text-base font-medium transition-colors ${
+                    isActive ? "bg-primary/10 text-primary" : "text-foreground hover:bg-secondary"
+                  }`;
+                  return (
+                    <li key={item.label}>
+                      {item.kind === "route" ? (
+                        <Link
+                          to={item.to}
+                          onClick={() => setMenuOpen(false)}
+                          aria-current={isActive ? "page" : undefined}
+                          className={className}
+                        >
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => scrollTo(item.id)}
+                          aria-current={isActive ? "true" : undefined}
+                          className={className}
+                        >
+                          {item.label}
+                        </button>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
               {cvUrl && (
                 <a
