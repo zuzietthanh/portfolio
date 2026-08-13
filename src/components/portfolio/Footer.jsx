@@ -17,7 +17,7 @@ export default function Footer({ profile }) {
             <span className="font-display font-medium text-foreground">
               {profile?.name || "Portfolio"}
             </span>
-            <span className="text-border">·</span>
+            <span aria-hidden="true" className="text-muted-foreground">·</span>
             <span>© {year}</span>
           </div>
         </motion.div>

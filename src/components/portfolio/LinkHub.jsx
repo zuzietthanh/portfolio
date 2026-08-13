@@ -21,11 +21,9 @@ const iconMap = {
 };
 
 export default function LinkHub({ links, profile }) {
-  if (!links || links.length === 0) return null;
-
   return (
-    <section id="contact" className="relative py-24 md:py-32 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section id="contact" className="relative scroll-mt-24 px-4 py-24 sm:px-6 md:py-32">
+      <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -35,22 +33,40 @@ export default function LinkHub({ links, profile }) {
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="h-px w-12 bg-primary" />
-            <span className="text-[10px] uppercase tracking-[0.25em] text-primary font-semibold">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-primary font-semibold">
               Connect
             </span>
             <div className="h-px w-12 bg-primary" />
           </div>
-          <h2 className="font-display text-3xl md:text-5xl font-medium tracking-tight text-foreground">
-            Let's Build Together
+          <h2 className="font-display text-3xl font-medium tracking-tight text-foreground md:text-5xl">
+            Get in touch
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
-            {profile?.email
-              ? `Reach out at ${profile.email} or find me on any of these platforms.`
-              : "Find me on any of these platforms. Always open to a good conversation."}
+          <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
+            I am open to marketing internships and entry-level roles. The quickest way to reach me
+            is email.
           </p>
+
+          {profile?.email && (
+            <a
+              href={`mailto:${profile.email}`}
+              className="mt-8 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 active:bg-primary/80"
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              {profile.email}
+            </a>
+          )}
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {!links || links.length === 0 ? (
+          <div className="rounded-2xl border border-border bg-card p-8 text-center">
+            <p className="text-muted-foreground">
+              No links yet. Add them to{" "}
+              <code className="font-mono text-sm text-foreground">src/content/links.json</code> and
+              they will appear here.
+            </p>
+          </div>
+        ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {links.map((link, i) => {
             const Icon = iconMap[link.icon] || Globe;
             const href = link.icon === "email" ? `mailto:${link.url}` : link.url;
@@ -59,7 +75,7 @@ export default function LinkHub({ links, profile }) {
                 key={link.id}
                 href={href}
                 target={link.icon === "email" ? undefined : "_blank"}
-                rel="noopener noreferrer"
+                rel={link.icon === "email" ? undefined : "noopener noreferrer"}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -84,6 +100,7 @@ export default function LinkHub({ links, profile }) {
             );
           })}
         </div>
+        )}
       </div>
     </section>
   );

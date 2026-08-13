@@ -5,6 +5,7 @@ import { ArrowLeft, Github, ExternalLink, ArrowDownToLine } from "lucide-react";
 import { getProfile, getProject, getDocuments } from "@/lib/content";
 import { Image } from "@/components/ui/image";
 import NavigationRay from "@/components/portfolio/NavigationRay";
+import Footer from "@/components/portfolio/Footer";
 
 export default function ProjectDetail() {
   const { id } = useParams();
@@ -18,25 +19,44 @@ export default function ProjectDetail() {
     window.scrollTo(0, 0);
   }, [id]);
 
+  const cvDoc = documents.find((d) => d.type === "cv");
+
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-6">
-        <p className="text-muted-foreground">Project not found.</p>
-        <Link to="/" className="text-primary text-sm font-medium">← Back home</Link>
+      <div className="min-h-screen">
+        <NavigationRay profile={profile} cvUrl={cvDoc?.file_url} />
+        <main
+          id="main"
+          className="flex min-h-svh flex-col items-center justify-center gap-5 px-6 text-center"
+        >
+          <h1 className="font-display text-3xl font-medium text-foreground">Project not found</h1>
+          <p className="max-w-md text-muted-foreground">
+            This project may have been renamed or removed from your content files.
+          </p>
+          <Link
+            to="/#work"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            All work
+          </Link>
+        </main>
+        <Footer profile={profile} />
       </div>
     );
   }
-
-  const cvDoc = documents.find((d) => d.type === "cv");
 
   return (
     <div className="min-h-screen">
       <NavigationRay profile={profile} cvUrl={cvDoc?.file_url} />
 
-      <div className="pt-28 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
-            <ArrowLeft className="h-4 w-4" /> Back to all work
+      <main id="main" className="px-4 pb-20 pt-28 sm:px-6 md:pt-36">
+        <div className="mx-auto max-w-6xl">
+          <Link
+            to="/#work"
+            className="mb-8 inline-flex items-center gap-2 rounded-lg py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back to all work
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
@@ -48,7 +68,7 @@ export default function ProjectDetail() {
               className="lg:col-span-2 lg:sticky lg:top-28 lg:self-start space-y-6"
             >
               <div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-primary font-semibold">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">
                   {project.project_role || "Project"}
                 </span>
                 <h1 className="font-display text-3xl md:text-4xl font-medium tracking-tight mt-2 text-foreground">
@@ -68,7 +88,7 @@ export default function ProjectDetail() {
               <div className="glass rounded-2xl p-5 space-y-4">
                 {project.tech_stack && project.tech_stack.length > 0 && (
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-2">Tools &amp; Skills</p>
+                    <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground mb-2">Tools &amp; Skills</p>
                     <div className="flex flex-wrap gap-1.5">
                       {project.tech_stack.map((tech, i) => (
                         <span key={i} className="text-xs font-medium px-2.5 py-1 rounded-full glass-primary text-primary">
@@ -81,12 +101,12 @@ export default function ProjectDetail() {
 
                 <div className="flex flex-col gap-3 pt-2 border-t border-border/40">
                   {project.github_url && (
-                    <a href={project.github_url} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <a href={project.github_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
                       <Github className="h-4 w-4" /> View Source
                     </a>
                   )}
                   {project.live_url && (
-                    <a href={project.live_url} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <a href={project.live_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
                       <ExternalLink className="h-4 w-4" /> View project
                     </a>
                   )}
@@ -126,15 +146,24 @@ export default function ProjectDetail() {
                 </p>
               )}
 
-              <div className="mt-12 pt-8 border-t border-border/40">
-                <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all">
-                  <ArrowLeft className="h-4 w-4" /> Back to all work
+              <div className="mt-12 border-t border-border/40 pt-8">
+                <Link
+                  to="/#work"
+                  className="group inline-flex min-h-[44px] items-center gap-2 rounded-lg text-sm font-medium text-primary"
+                >
+                  <ArrowLeft
+                    className="h-4 w-4 transition-transform group-hover:-translate-x-1 motion-reduce:transition-none"
+                    aria-hidden="true"
+                  />
+                  Back to all work
                 </Link>
               </div>
             </motion.div>
           </div>
         </div>
-      </div>
+      </main>
+
+      <Footer profile={profile} />
     </div>
   );
 }

@@ -27,7 +27,7 @@ function DocumentTile({ doc, index }) {
         >
           <Icon className="h-5 w-5 text-primary" />
         </span>
-        <span className="rounded-full glass px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+        <span className="rounded-full glass px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
           {config.label}
         </span>
       </div>
@@ -54,7 +54,7 @@ function DocumentTile({ doc, index }) {
         <a
           href={doc.file_url}
           download
-          className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           <Download className="h-4 w-4" aria-hidden="true" />
           Download <span className="sr-only">{doc.title}</span>
@@ -77,7 +77,7 @@ export default function DocumentHub({ documents }) {
         >
           <div className="mb-4 flex items-center gap-3">
             <div className="h-px w-12 bg-primary" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
+            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">
               Evidence Suite
             </span>
           </div>

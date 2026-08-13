@@ -254,7 +254,7 @@ export default function DocumentDetail() {
                         <span className="font-medium text-foreground">{item.reviewer}</span>
                         {item.date && (
                           <>
-                            <span aria-hidden="true" className="text-border">·</span>
+                            <span aria-hidden="true" className="text-muted-foreground">·</span>
                             <span>{item.date}</span>
                           </>
                         )}
@@ -263,7 +263,7 @@ export default function DocumentDetail() {
 
                     {item.response && (
                       <div className="mt-4 border-t border-border/60 pt-4">
-                        <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+                        <p className="mb-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
                           What I did
                         </p>
                         <p className="text-sm leading-relaxed text-muted-foreground">

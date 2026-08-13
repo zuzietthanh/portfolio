@@ -40,7 +40,7 @@ export default function StatementOfPurpose() {
               <span>{profile?.name}</span>
               {statement.last_updated && (
                 <>
-                  <span aria-hidden="true" className="text-border">·</span>
+                  <span aria-hidden="true" className="text-muted-foreground">·</span>
                   <span>Updated {statement.last_updated}</span>
                 </>
               )}

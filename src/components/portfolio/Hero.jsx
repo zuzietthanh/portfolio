@@ -113,7 +113,7 @@ export default function Hero({ profile }) {
           >
             {stats.map((stat) => (
               <div key={stat.label} className="min-w-[7rem] text-center">
-                <dt className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                <dt className="mb-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                   {stat.label}
                 </dt>
                 <dd className="font-display text-lg font-medium text-foreground md:text-xl">

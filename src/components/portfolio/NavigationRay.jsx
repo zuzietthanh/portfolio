@@ -107,7 +107,7 @@ export default function NavigationRay({ profile, cvUrl }) {
         <button
           type="button"
           onClick={() => scrollTo("hero")}
-          className="-ml-2 rounded-lg px-2 py-2 font-display text-base font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
+          className="-ml-2 flex min-h-[44px] items-center rounded-lg px-2 font-display text-base font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
         >
           {profile?.name || "Portfolio"}
           <span className="text-primary">.</span>

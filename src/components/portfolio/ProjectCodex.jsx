@@ -52,24 +52,27 @@ function ProjectPlate({ project, index }) {
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary flex items-center justify-center">
-              <span className="font-display text-4xl text-muted-foreground/40">
+              <span aria-hidden="true" className="font-display text-4xl text-muted-foreground/80">
                 {project.title?.[0] || "·"}
               </span>
             </div>
           )}
 
-          {/* Glass overlay that slides away on hover */}
+          {/* Resting overlay, slides away on hover. A dark scrim rather than a
+              light glass: the frosted version tinted the cover image *lighter*,
+              which dropped the label text to 4.31:1 against it. Weighted to the
+              bottom, where the text sits. */}
           <motion.div
             animate={{ y: hovered ? "100%" : "0%" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="absolute inset-0 glass-strong flex flex-col justify-end p-6"
+            className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background via-background/92 to-background/40 p-6"
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-primary font-semibold">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">
                 {project.project_role || "Project"}
               </span>
               {project.featured && (
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                <span className="text-[11px] uppercase tracking-wider text-muted-foreground">
                   Featured
                 </span>
               )}
@@ -86,7 +89,7 @@ function ProjectPlate({ project, index }) {
           <motion.div
             animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 20 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="absolute inset-0 flex flex-col justify-between p-6 pointer-events-none"
+            className="pointer-events-none absolute inset-0 flex flex-col justify-between bg-gradient-to-t from-background/95 via-background/60 to-background/30 p-6"
           >
             <div className="flex justify-end">
               <div className="h-10 w-10 rounded-full glass-strong flex items-center justify-center">
@@ -102,7 +105,7 @@ function ProjectPlate({ project, index }) {
                   {project.tech_stack.slice(0, 4).map((tech, i) => (
                     <span
                       key={i}
-                      className="text-[10px] font-medium px-2 py-1 rounded-full glass text-foreground"
+                      className="text-[11px] font-medium px-2 py-1 rounded-full glass text-foreground"
                     >
                       {tech}
                     </span>
@@ -118,11 +121,9 @@ function ProjectPlate({ project, index }) {
 }
 
 export default function ProjectCodex({ projects }) {
-  if (!projects || projects.length === 0) return null;
-
   return (
-    <section id="work" className="relative py-24 md:py-32 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="work" className="relative scroll-mt-24 px-4 py-24 sm:px-6 md:py-32">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -132,24 +133,33 @@ export default function ProjectCodex({ projects }) {
         >
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-12 bg-primary" />
-            <span className="text-[10px] uppercase tracking-[0.25em] text-primary font-semibold">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-primary font-semibold">
               Project Codex
             </span>
           </div>
           <h2 className="font-display text-3xl md:text-5xl font-medium tracking-tight text-foreground">
             Selected Work
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-lg">
-            A curated selection of projects spanning architecture, product engineering, and
-            interactive experiences.
+          <p className="mt-4 max-w-lg text-muted-foreground">
+            Campaigns, content, and research projects from my coursework and personal practice.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {projects.map((project, i) => (
-            <ProjectPlate key={project.id} project={project} index={i} />
-          ))}
-        </div>
+        {!projects || projects.length === 0 ? (
+          <div className="rounded-2xl border border-border bg-card p-8 text-center">
+            <p className="text-muted-foreground">
+              No projects yet. Add them to{" "}
+              <code className="font-mono text-sm text-foreground">src/content/projects.json</code>{" "}
+              and they will appear here.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+            {projects.map((project, i) => (
+              <ProjectPlate key={project.id} project={project} index={i} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
