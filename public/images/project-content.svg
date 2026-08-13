@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Meridian">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Content">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="hsl(222 24% 8%)"/>
-      <stop offset="100%" stop-color="hsl(222 28% 4%)"/>
+      <stop offset="0%" stop-color="hsl(228 24% 8%)"/>
+      <stop offset="100%" stop-color="hsl(228 28% 4%)"/>
     </linearGradient>
     <radialGradient id="orb1" cx="30%" cy="28%" r="46%">
-      <stop offset="0%" stop-color="hsl(262 92% 62%)" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="hsl(262 92% 62%)" stop-opacity="0"/>
+      <stop offset="0%" stop-color="hsl(196 92% 62%)" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="hsl(196 92% 62%)" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="orb2" cx="76%" cy="74%" r="40%">
-      <stop offset="0%" stop-color="hsl(290 88% 58%)" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="hsl(290 88% 58%)" stop-opacity="0"/>
+      <stop offset="0%" stop-color="hsl(224 88% 58%)" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="hsl(224 88% 58%)" stop-opacity="0"/>
     </radialGradient>
     <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
       <path d="M60 0H0V60" fill="none" stroke="hsl(220 22% 96%)" stroke-opacity="0.05" stroke-width="1"/>
@@ -21,8 +21,8 @@
   <rect width="1200" height="900" fill="url(#orb1)"/>
   <rect width="1200" height="900" fill="url(#orb2)"/>
   <text x="600" y="470" text-anchor="middle" font-family="Geist, Helvetica, Arial, sans-serif"
-        font-size="132" font-weight="500" letter-spacing="-4"
-        fill="hsl(220 22% 96%)" fill-opacity="0.9">Meridian</text>
+        font-size="120" font-weight="500" letter-spacing="-4"
+        fill="hsl(220 22% 96%)" fill-opacity="0.9">Content</text>
   <text x="600" y="530" text-anchor="middle" font-family="Geist Mono, Menlo, monospace"
-        font-size="22" letter-spacing="8" fill="hsl(262 92% 68%)" fill-opacity="0.85">PLACEHOLDER</text>
+        font-size="22" letter-spacing="8" fill="hsl(196 92% 68%)" fill-opacity="0.85">PLACEHOLDER</text>
 </svg>

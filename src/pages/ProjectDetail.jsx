@@ -68,7 +68,7 @@ export default function ProjectDetail() {
               <div className="glass rounded-2xl p-5 space-y-4">
                 {project.tech_stack && project.tech_stack.length > 0 && (
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-2">Tech Stack</p>
+                    <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-2">Tools &amp; Skills</p>
                     <div className="flex flex-wrap gap-1.5">
                       {project.tech_stack.map((tech, i) => (
                         <span key={i} className="text-xs font-medium px-2.5 py-1 rounded-full glass-primary text-primary">
@@ -87,7 +87,7 @@ export default function ProjectDetail() {
                   )}
                   {project.live_url && (
                     <a href={project.live_url} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      <ExternalLink className="h-4 w-4" /> Live Demo
+                      <ExternalLink className="h-4 w-4" /> View project
                     </a>
                   )}
                 </div>
