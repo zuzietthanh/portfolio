@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Professional links",
+  "description": "A list of links shown in the Contact section.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "label", "url"],
+    "additionalProperties": false,
+    "properties": {
+      "_comment": { "type": "string" },
+      "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "label": { "type": "string", "minLength": 1, "description": "e.g. \"LinkedIn\"." },
+      "url": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Full address starting with https:// — except for the email link, which is just the address."
+      },
+      "icon": {
+        "type": "string",
+        "enum": ["linkedin", "github", "twitter", "email", "globe", "dribbble", "medium"],
+        "description": "Must be one of these exact words."
+      },
+      "sort_order": { "type": "number" },
+      "is_published": { "type": "boolean" }
+    }
+  }
+}

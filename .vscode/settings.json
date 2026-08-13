@@ -1,0 +1,25 @@
+{
+  "// Note": "Connects each content file to its schema, so VS Code underlines mistakes as you type and suggests the allowed field names with Ctrl+Space.",
+  "json.schemas": [
+    {
+      "fileMatch": ["/src/content/profile.json"],
+      "url": "./src/content/schemas/profile.schema.json"
+    },
+    {
+      "fileMatch": ["/src/content/projects.json"],
+      "url": "./src/content/schemas/projects.schema.json"
+    },
+    {
+      "fileMatch": ["/src/content/documents.json"],
+      "url": "./src/content/schemas/documents.schema.json"
+    },
+    {
+      "fileMatch": ["/src/content/links.json"],
+      "url": "./src/content/schemas/links.schema.json"
+    },
+    {
+      "fileMatch": ["/src/content/statement.json"],
+      "url": "./src/content/schemas/statement.schema.json"
+    }
+  ]
+}

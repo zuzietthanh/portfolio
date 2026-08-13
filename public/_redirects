@@ -1,0 +1,5 @@
+# Send every address to index.html so the site's own routing can handle it.
+# Without this, opening /statement-of-purpose or /document/cv directly returns
+# a 404 on Netlify — which is what happens when someone clicks a shared link
+# rather than navigating from the home page.
+/*  /index.html  200

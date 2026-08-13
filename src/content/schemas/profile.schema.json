@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Profile",
+  "description": "Your personal details. One object — not a list.",
+  "type": "object",
+  "required": ["name"],
+  "additionalProperties": false,
+  "properties": {
+    "_comment": { "type": "string", "description": "A note to yourself. Never shown on the site." },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Your full name. Shown large on the home page; the last word is highlighted."
+    },
+    "role": { "type": "string", "description": "e.g. \"Undergraduate Marketing Student\"." },
+    "tagline": { "type": "string", "description": "Short line in the pill above your name." },
+    "years_experience": { "type": "number", "minimum": 0 },
+    "specialty": { "type": "string", "description": "Shown as \"Focus\" on the home page." },
+    "summary": {
+      "type": "string",
+      "description": "Short intro. Basic HTML allowed. First 180 characters appear on the home page."
+    },
+    "email": {
+      "type": "string",
+      "description": "Used for the contact button. Must look like name@example.com.",
+      "pattern": "^$|^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    },
+    "location": { "type": "string", "description": "Optional. Leave \"\" to hide it." },
+    "avatar_url": {
+      "type": "string",
+      "description": "Path to your photo, e.g. \"/images/me.jpg\". Put the file in public/images/."
+    }
+  }
+}
