@@ -1,10 +1,47 @@
 [
   {
+    "_comment": "Each document needs three things to meet the brief: the final file, a revision narrative with evidence of process, and peer feedback. Replace the placeholder text — keep the shape.",
     "id": "cv",
     "title": "Curriculum Vitae",
     "type": "cv",
     "file_url": "/documents/thanh-vu-cv.pdf",
-    "description": "Education, experience, and skills. Replace the PDF in public/documents/.",
+    "description": "Education, experience, and skills on one page.",
+    "summary": "A one-page CV aimed at marketing internships. Written to lead with relevant coursework and campaign work rather than a chronological job history, since my experience is still mostly academic.",
+    "revision_narrative": "<p>PLACEHOLDER — replace with your own account of how this document changed.</p><p>Describe what your first draft looked like and what was wrong with it. Then describe what you changed and, more importantly, <strong>why</strong>. A grader is looking for evidence that you revised with intent, not that you ran a spell check.</p><p>Useful things to mention: what you cut and why it did not earn its space, how you rewrote bullet points to show results instead of duties, and anything you were unsure about.</p>",
+    "process_evidence": [
+      {
+        "label": "Draft 1",
+        "date": "Week 2",
+        "note": "PLACEHOLDER — what this first version looked like and its main weakness.",
+        "file_url": ""
+      },
+      {
+        "label": "Draft 2",
+        "date": "Week 4",
+        "note": "PLACEHOLDER — what you changed after feedback, and why.",
+        "file_url": ""
+      },
+      {
+        "label": "Final",
+        "date": "Week 6",
+        "note": "PLACEHOLDER — the last round of changes before submitting.",
+        "file_url": "/documents/thanh-vu-cv.pdf"
+      }
+    ],
+    "peer_feedback": [
+      {
+        "reviewer": "Peer reviewer 1",
+        "date": "Week 3",
+        "comment": "PLACEHOLDER — paste or paraphrase what your reviewer actually said. Keep it specific; vague praise is not evidence.",
+        "response": "PLACEHOLDER — what you did about it. It is fine to say you disagreed and kept it as it was, as long as you explain your reasoning."
+      },
+      {
+        "reviewer": "Peer reviewer 2",
+        "date": "Week 5",
+        "comment": "PLACEHOLDER — a second piece of feedback.",
+        "response": "PLACEHOLDER — how you responded."
+      }
+    ],
     "sort_order": 1,
     "is_published": true
   },
@@ -13,7 +50,31 @@
     "title": "Cover Letter",
     "type": "cover_letter",
     "file_url": "/documents/thanh-vu-cover-letter.pdf",
-    "description": "A tailored introduction for the roles you are applying to.",
+    "description": "A tailored introduction for the roles I am applying to.",
+    "summary": "A cover letter written for a specific marketing internship rather than a generic template, so it can show how I connect my coursework to what an employer actually asked for.",
+    "revision_narrative": "<p>PLACEHOLDER — replace with your own account.</p><p>Explain how the letter started and how it ended up. Cover letters usually improve by getting more specific: naming the organisation, referencing something real about it, and cutting sentences that could appear in anyone's letter.</p><p>Say what you removed and why it was not doing any work.</p>",
+    "process_evidence": [
+      {
+        "label": "Draft 1",
+        "date": "Week 3",
+        "note": "PLACEHOLDER — the first attempt and what was generic about it.",
+        "file_url": ""
+      },
+      {
+        "label": "Final",
+        "date": "Week 6",
+        "note": "PLACEHOLDER — what made the final version specific.",
+        "file_url": "/documents/thanh-vu-cover-letter.pdf"
+      }
+    ],
+    "peer_feedback": [
+      {
+        "reviewer": "Peer reviewer 1",
+        "date": "Week 4",
+        "comment": "PLACEHOLDER — what your reviewer said about the letter.",
+        "response": "PLACEHOLDER — what you changed as a result."
+      }
+    ],
     "sort_order": 2,
     "is_published": true
   },
@@ -22,7 +83,32 @@
     "title": "LinkedIn Profile",
     "type": "other",
     "file_url": "/documents/thanh-vu-references.pdf",
-    "description": "A printable snapshot of your LinkedIn profile and its revision history.",
+    "description": "My professional profile and how it developed.",
+    "summary": "A snapshot of my LinkedIn profile, included because it is the version of my professional self that an employer is most likely to find first — and the one that has to work without me in the room.",
+    "external_url": "https://www.linkedin.com/in/example",
+    "revision_narrative": "<p>PLACEHOLDER — replace with your own account.</p><p>Describe how your headline and About section changed. A common improvement is moving from a job title to a statement of what you do and what you are looking for.</p><p>Mention anything you added — projects, coursework, skills — and why you judged it worth including.</p>",
+    "process_evidence": [
+      {
+        "label": "Before",
+        "date": "Week 2",
+        "note": "PLACEHOLDER — what the profile looked like at the start. A screenshot works well as evidence here.",
+        "file_url": ""
+      },
+      {
+        "label": "After",
+        "date": "Week 6",
+        "note": "PLACEHOLDER — the revised profile and what changed.",
+        "file_url": "/documents/thanh-vu-references.pdf"
+      }
+    ],
+    "peer_feedback": [
+      {
+        "reviewer": "Peer reviewer 1",
+        "date": "Week 5",
+        "comment": "PLACEHOLDER — feedback on your profile.",
+        "response": "PLACEHOLDER — your response."
+      }
+    ],
     "sort_order": 3,
     "is_published": true
   }

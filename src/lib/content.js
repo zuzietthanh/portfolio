@@ -63,6 +63,11 @@ export function getDocuments() {
   return publishedSorted(documentsData, "documents.json");
 }
 
+/** A single document by its "id" field, or null when nothing matches. */
+export function getDocument(id) {
+  return getDocuments().find((document) => document.id === id) ?? null;
+}
+
 export function getLinks() {
   return publishedSorted(linksData, "links.json");
 }

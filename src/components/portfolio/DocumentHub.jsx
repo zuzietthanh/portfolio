@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FileText, Download, Check, Mail, FileSpreadsheet } from "lucide-react";
+import { FileText, Download, Mail, FileSpreadsheet, ArrowRight } from "lucide-react";
 
 const typeConfig = {
   cv: { icon: FileText, label: "CV" },
@@ -9,92 +9,65 @@ const typeConfig = {
 };
 
 function DocumentTile({ doc, index }) {
-  const [downloading, setDownloading] = useState(false);
-  const [done, setDone] = useState(false);
   const config = typeConfig[doc.type] || typeConfig.other;
   const Icon = config.icon;
 
-  const handleDownload = (e) => {
-    e.preventDefault();
-    if (downloading) return;
-    setDownloading(true);
-    setDone(false);
-
-    setTimeout(() => {
-      const link = document.createElement("a");
-      link.href = doc.file_url;
-      link.download = doc.title || "document";
-      link.target = "_blank";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setDone(true);
-      setDownloading(false);
-      setTimeout(() => setDone(false), 2000);
-    }, 800);
-  };
-
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="glass rounded-2xl p-6 hover:glass-strong transition-all duration-300 group"
+      className="flex flex-col rounded-2xl glass p-6 transition-colors hover:bg-white/[0.07]"
     >
-      <div className="flex items-start justify-between mb-6">
-        <div className="h-12 w-12 rounded-xl glass-primary flex items-center justify-center">
+      <div className="mb-6 flex items-start justify-between gap-3">
+        <span
+          aria-hidden="true"
+          className="flex h-12 w-12 items-center justify-center rounded-xl glass-primary"
+        >
           <Icon className="h-5 w-5 text-primary" />
-        </div>
-        <span className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground font-medium px-2.5 py-1 rounded-full glass">
+        </span>
+        <span className="rounded-full glass px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
           {config.label}
         </span>
       </div>
 
-      <h3 className="font-display text-lg font-medium text-foreground mb-1">{doc.title}</h3>
+      <h3 className="font-display text-lg font-medium text-foreground">{doc.title}</h3>
       {doc.description && (
-        <p className="text-sm text-muted-foreground mb-6 line-clamp-2">{doc.description}</p>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{doc.description}</p>
       )}
 
-      <button
-        onClick={handleDownload}
-        disabled={downloading}
-        className="relative w-full overflow-hidden rounded-xl bg-primary/10 border border-primary/20 text-primary text-sm font-semibold py-3 px-4 flex items-center justify-center gap-2 hover:bg-primary/15 transition-all duration-300 disabled:opacity-70"
-      >
-        {downloading && (
-          <motion.div
-            className="absolute left-0 top-0 h-full bg-primary/15"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 0.8 }}
+      {/* Two distinct actions rather than a card-wide link wrapping a button:
+          the detail page carries the revision story and peer feedback, while
+          the download stays one click away for anyone who only wants the file. */}
+      <div className="mt-6 flex flex-col gap-2 pt-2">
+        <Link
+          to={`/document/${doc.id}`}
+          className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary/10 px-4 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary/20 active:bg-primary/25"
+        >
+          View details
+          <ArrowRight
+            className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none"
+            aria-hidden="true"
           />
-        )}
-        <span className="relative flex items-center gap-2">
-          {done ? (
-            <>
-              <Check className="h-4 w-4" />
-              Downloaded
-            </>
-          ) : downloading ? (
-            "Preparing..."
-          ) : (
-            <>
-              <Download className="h-4 w-4" />
-              Download
-            </>
-          )}
-        </span>
-      </button>
-    </motion.div>
+        </Link>
+        <a
+          href={doc.file_url}
+          download
+          className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <Download className="h-4 w-4" aria-hidden="true" />
+          Download <span className="sr-only">{doc.title}</span>
+        </a>
+      </div>
+    </motion.article>
   );
 }
 
 export default function DocumentHub({ documents }) {
-  if (!documents || documents.length === 0) return null;
-
   return (
-    <section id="documents" className="relative py-24 md:py-32 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="documents" className="relative scroll-mt-24 px-4 py-24 sm:px-6 md:py-32">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -102,26 +75,36 @@ export default function DocumentHub({ documents }) {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
+          <div className="mb-4 flex items-center gap-3">
             <div className="h-px w-12 bg-primary" />
-            <span className="text-[10px] uppercase tracking-[0.25em] text-primary font-semibold">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
               Evidence Suite
             </span>
           </div>
-          <h2 className="font-display text-3xl md:text-5xl font-medium tracking-tight text-foreground">
+          <h2 className="font-display text-3xl font-medium tracking-tight text-foreground md:text-5xl">
             Documents
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-lg">
-            Download my CV and cover letters directly. Everything you need to move the
-            conversation forward.
+          <p className="mt-4 max-w-lg text-muted-foreground">
+            Each document below includes the final file, how it changed across drafts, and the peer
+            feedback that shaped it.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {documents.map((doc, i) => (
-            <DocumentTile key={doc.id} doc={doc} index={i} />
-          ))}
-        </div>
+        {documents.length === 0 ? (
+          <div className="rounded-2xl border border-border bg-card p-8 text-center">
+            <p className="text-muted-foreground">
+              No documents yet. Add them to{" "}
+              <code className="font-mono text-sm text-foreground">src/content/documents.json</code>{" "}
+              and they will appear here.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {documents.map((doc, i) => (
+              <DocumentTile key={doc.id} doc={doc} index={i} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
