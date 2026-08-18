@@ -1,0 +1,58 @@
+[
+  {
+    "id": "brew-and-bloom-campaign",
+    "title": "Brew & Bloom",
+    "subtitle": "Integrated launch campaign for an independent coffee shop",
+    "description": "<p>PLACEHOLDER PROJECT — replace with your own coursework or internship work.</p><h2>The brief</h2><p>A neighbourhood coffee shop was opening a second location and had no awareness outside its original street. The goal was to fill the new store's first month without discounting.</p><h2>What I did</h2><ul><li>Audience research with 40 short intercept interviews near the new site</li><li>Positioning around \"your third place\" rather than product or price</li><li>A four-week rollout across Instagram, local partnerships, and in-store signage</li></ul><h2>Result</h2><p>Describe the outcome here — footfall, follower growth, redemption rate, whatever you actually measured.</p>",
+    "cover_image": "/images/project-campaign.svg",
+    "tech_stack": ["Campaign Strategy", "Audience Research", "Copywriting", "Canva", "Meta Business Suite"],
+    "project_role": "Campaign Lead",
+    "github_url": "",
+    "live_url": "",
+    "featured": true,
+    "sort_order": 1,
+    "is_published": true
+  },
+  {
+    "id": "gen-z-content-series",
+    "title": "Unfiltered",
+    "subtitle": "Short-form content series built for a Gen Z audience",
+    "description": "<p>PLACEHOLDER PROJECT — replace with your own work.</p><h2>The idea</h2><p>A weekly short-form video series testing whether unpolished, behind-the-scenes content outperforms produced brand video for a student audience.</p><h2>What I did</h2><ul><li>Content calendar and hook formulas for TikTok and Reels</li><li>A/B tested thumbnail and first-three-seconds variants</li><li>Tracked retention and saves rather than raw views</li></ul><h2>What I learned</h2><p>Write what the data actually told you — including anything that did not work.</p>",
+    "cover_image": "/images/project-content.svg",
+    "tech_stack": ["Social Strategy", "Content Calendar", "TikTok", "Analytics", "CapCut"],
+    "project_role": "Content Strategist",
+    "github_url": "",
+    "live_url": "",
+    "featured": true,
+    "sort_order": 2,
+    "is_published": true
+  },
+  {
+    "id": "campus-market-research",
+    "title": "Campus Spend Report",
+    "subtitle": "Primary research into student purchasing habits",
+    "description": "<p>PLACEHOLDER PROJECT — replace with your own coursework.</p><p>A survey of student spending on food, subscriptions, and transport, run to practise questionnaire design and turn raw responses into a recommendation a brand could act on.</p><ul><li>Questionnaire design avoiding leading and double-barrelled questions</li><li>Sample of respondents across year groups</li><li>Findings written up as a short deck with three concrete recommendations</li></ul>",
+    "cover_image": "/images/project-research.svg",
+    "tech_stack": ["Market Research", "Survey Design", "Excel", "Data Analysis", "Presentation"],
+    "project_role": "Researcher",
+    "github_url": "",
+    "live_url": "",
+    "featured": false,
+    "sort_order": 3,
+    "is_published": true
+  },
+  {
+    "id": "brand-refresh-concept",
+    "title": "Northbound",
+    "subtitle": "Speculative brand refresh for a local outdoor retailer",
+    "description": "<p>PLACEHOLDER PROJECT — replace with your own work.</p><p>A self-directed exercise rebuilding a tired retail brand: audit, positioning statement, tone of voice, and a small set of applied mockups.</p><p>This one has no cover image on purpose, so you can see what a project looks like without one.</p>",
+    "cover_image": "",
+    "tech_stack": ["Brand Strategy", "Tone of Voice", "Competitor Audit", "Figma"],
+    "project_role": "Solo Project",
+    "github_url": "",
+    "live_url": "",
+    "featured": false,
+    "sort_order": 4,
+    "is_published": true
+  }
+]

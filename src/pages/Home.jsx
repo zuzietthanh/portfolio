@@ -22,12 +22,14 @@ export default function Home() {
     <div className="min-h-screen">
       <NavigationRay profile={profile} cvUrl={cvDoc?.file_url} />
       <main id="main">
-        <Hero profile={profile} />
+        <Hero profile={profile} hasProjects={projects.length > 0} />
         {/* Required coursework leads: statement, then documents. The work grid
-            is optional to the brief, so it follows them. */}
+            is optional to the brief, so it follows them — and disappears
+            entirely while projects.json is empty, rather than showing a
+            heading with nothing under it. Add a project back and it returns. */}
         <StatementCallout statement={statement} />
         <DocumentHub documents={documents} />
-        <ProjectCodex projects={projects} />
+        {projects.length > 0 && <ProjectCodex projects={projects} />}
         <LinkHub links={links} profile={profile} />
       </main>
       <Footer profile={profile} />

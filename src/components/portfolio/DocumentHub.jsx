@@ -84,9 +84,12 @@ export default function DocumentHub({ documents }) {
           <h2 className="font-display text-3xl font-medium tracking-tight text-foreground md:text-5xl">
             Documents
           </h2>
+          {/* Deliberately does not promise a revision story on every document:
+              those sections only appear once documents.json has one, so a
+              blanket claim here would be contradicted by the page it links to. */}
           <p className="mt-4 max-w-lg text-muted-foreground">
-            Each document below includes the final file, how it changed across drafts, and the peer
-            feedback that shaped it.
+            The documents behind my applications, each on its own page with the final file and the
+            story of how it got there.
           </p>
         </motion.div>
 

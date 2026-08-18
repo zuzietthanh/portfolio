@@ -2,17 +2,26 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownToLine, Menu, X } from "lucide-react";
+import { getProjects } from "@/lib/content";
 
 // The statement of purpose is a page of its own; everything else is a section
 // of the home page. Required coursework leads, so it sits directly after Home
 // and the optional work grid moves below the documents.
-const NAV_ITEMS = [
+const ALL_NAV_ITEMS = [
   { kind: "section", id: "hero", label: "Home" },
   { kind: "route", to: "/statement-of-purpose", label: "Statement" },
   { kind: "section", id: "documents", label: "Documents" },
   { kind: "section", id: "work", label: "Work" },
   { kind: "section", id: "contact", label: "Contact" },
 ];
+
+// The work grid is optional to the brief, so the home page leaves it out while
+// projects.json is empty. Its nav entry has to go with it — the brief marks on
+// every menu item working, and this one would scroll to a section that is not
+// there. Content is imported at build time, so this settles once at load.
+const NAV_ITEMS = ALL_NAV_ITEMS.filter(
+  (item) => item.id !== "work" || getProjects().length > 0
+);
 
 const SECTION_IDS = NAV_ITEMS.filter((item) => item.kind === "section").map((item) => item.id);
 

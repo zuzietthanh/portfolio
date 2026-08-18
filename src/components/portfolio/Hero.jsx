@@ -9,8 +9,15 @@ function splitName(name) {
   return [parts.slice(0, -1).join(" "), parts[parts.length - 1]];
 }
 
-export default function Hero({ profile }) {
+export default function Hero({ profile, hasProjects = false }) {
   const [leading, trailing] = splitName(profile?.name);
+
+  // The main call to action has to land somewhere that exists. With no work
+  // grid on the page it points at the documents instead, which are the part
+  // the brief actually asks a reader to find.
+  const primaryCta = hasProjects
+    ? { id: "work", label: "View my work" }
+    : { id: "documents", label: "View my documents" };
 
   // Only render a stat that actually has a value — an empty slot reads as a bug.
   const stats = [
@@ -93,10 +100,12 @@ export default function Hero({ profile }) {
         >
           <button
             type="button"
-            onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() =>
+              document.getElementById(primaryCta.id)?.scrollIntoView({ behavior: "smooth" })
+            }
             className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 active:bg-primary/80"
           >
-            View my work
+            {primaryCta.label}
             <ArrowDown
               className="h-4 w-4 transition-transform group-hover:translate-y-0.5 motion-reduce:transition-none"
               aria-hidden="true"

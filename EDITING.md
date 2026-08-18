@@ -256,6 +256,21 @@ after the first `}`, and paste:
 This file is a **list**, so it starts with `[` and ends with `]`. Each project
 sits between `{` and `}`.
 
+### The Work section is currently switched off
+
+`projects.json` is empty (`[]`), so the **Work** section does not appear on
+your home page and **Work** is not in the menu. That is deliberate — an empty
+heading looks worse than no heading, and a menu item that scrolls nowhere
+counts against you on the "functional links" criterion.
+
+Add one project to the file and both come back by themselves. Nothing to
+switch on.
+
+The four sample projects that used to be there are parked in
+**`projects.example.json`** in the main project folder. To bring them back,
+copy everything from that file into `src/content/projects.json`. That file is
+not part of your website — it is only there to copy from.
+
 ### Adding a project
 
 Copy an existing project block, paste it after the last one, and add a comma
