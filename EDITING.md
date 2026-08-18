@@ -435,12 +435,36 @@ on). Most hosts need to be told to send all addresses to `index.html`, or those
 pages will show "404 Not Found" when someone opens them directly — which is
 exactly what will happen when your marker clicks your link.
 
-A file named `_redirects` already exists in `public/` to handle this on Netlify.
-On other hosts, look for a setting called **"SPA fallback"**, **"rewrite all
-routes to index.html"**, or **"single-page application"**.
+This is already handled for the two hosts you are likely to use:
+
+| Host | File that handles it |
+| --- | --- |
+| Vercel | `vercel.json` |
+| Netlify | `public/_redirects` |
+
+Both files are already in the project. On any other host, look for a setting
+called **"SPA fallback"**, **"rewrite all routes to index.html"**, or
+**"single-page application"**.
 
 **Always test your published link by opening a document page directly** before
 submitting.
+
+---
+
+## Publishing with GitHub and Vercel
+
+This is the setup where you edit a file, and your live website updates by
+itself a minute later. Full walkthrough in **`DEPLOYING.md`**.
+
+Once it is set up, publishing a change is three commands:
+
+```bash
+git add .
+git commit -m "Describe what you changed"
+git push
+```
+
+That is it. Vercel notices the push and rebuilds the site automatically.
 
 ---
 
