@@ -357,7 +357,28 @@ your assignment specifically marks you on.
 
 ---
 
-## Colours
+## Your logo
+
+The TV monogram appears in three places, and each one has its own copy of the
+shape. **If you change it, change all three** or they will drift apart:
+
+| Where you see it | File |
+| --- | --- |
+| Menu bar, top left | `src/components/portfolio/Logo.jsx` |
+| Browser tab icon | `public/favicon.svg` |
+| Foot of the CV sidebar | `cv-source/thanh-vu-cv.html` (search for `class="seal"`) |
+
+Changing the colour is the easy part. In each file, look for these:
+
+```
+#CFE0FF and #6FA3FB   the bright T
+#5B93F9 and #2154C4   the deeper V
+#1B2742 #101827 #080B12   the dark tile behind it
+```
+
+The CV copy has no tile, because the sidebar it sits on is already dark.
+
+After editing the CV one, run `npm run cv` to rebuild the PDF.
 
 **File:** `src/index.css` (near the top)
 

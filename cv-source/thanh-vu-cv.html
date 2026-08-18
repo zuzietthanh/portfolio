@@ -75,6 +75,17 @@
     color: var(--blue-lift);
   }
 
+  /* The TV mark, sitting at the foot of the sidebar like a seal. Same shape as
+     the site logo and the favicon — change one, change all three. The panel is
+     already dark, so the mark is drawn without its tile: a second dark square
+     on a dark column reads as a floating box rather than a logo. */
+  .seal {
+    margin-top: 11mm;
+    display: flex;
+    justify-content: center;
+  }
+  .seal svg { width: 13mm; height: 13mm; display: block; }
+
   .panel h2 {
     font-size: 8.4pt;
     font-weight: 600;
@@ -227,6 +238,24 @@
         <li>Community volunteering</li>
       </ul>
     </section>
+
+    <div class="seal">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cvLit" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0" stop-color="#CFE0FF"/><stop offset="1" stop-color="#6FA3FB"/>
+          </linearGradient>
+          <linearGradient id="cvDeep" x1="0" y1="0" x2="0.3" y2="1">
+            <stop offset="0" stop-color="#5B93F9"/><stop offset="1" stop-color="#2154C4"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(32 32) scale(0.98) translate(-32 -37)">
+          <path d="M13 16 H51 V23 H13 Z" fill="url(#cvLit)"/>
+          <path d="M16 25 L32 49 L48 25 L48 34 L32 58 L16 34 Z" fill="url(#cvDeep)"/>
+          <path d="M28.5 23 H35.5 V40 L32 45 L28.5 40 Z" fill="url(#cvLit)"/>
+        </g>
+      </svg>
+    </div>
   </aside>
 
   <main class="main">

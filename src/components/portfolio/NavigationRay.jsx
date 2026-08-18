@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownToLine, Menu, X } from "lucide-react";
 import { getProjects } from "@/lib/content";
+import Logo from "@/components/portfolio/Logo";
 
 // The statement of purpose is a page of its own; everything else is a section
 // of the home page. Required coursework leads, so it sits directly after Home
@@ -116,10 +117,13 @@ export default function NavigationRay({ profile, cvUrl }) {
         <button
           type="button"
           onClick={() => scrollTo("hero")}
-          className="-ml-2 flex min-h-[44px] items-center rounded-lg px-2 font-display text-base font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
+          className="-ml-2 flex min-h-[44px] items-center gap-2.5 rounded-lg px-2 font-display text-base font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
         >
-          {profile?.name || "Portfolio"}
-          <span className="text-primary">.</span>
+          <Logo size={26} className="shrink-0" />
+          <span>
+            {profile?.name || "Portfolio"}
+            <span className="text-primary">.</span>
+          </span>
         </button>
 
         <nav aria-label="Main" className="hidden md:block">

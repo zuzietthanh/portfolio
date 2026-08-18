@@ -1,5 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="14" fill="hsl(225 24% 6%)"/>
-  <circle cx="32" cy="32" r="15" fill="none" stroke="hsl(219 92% 64%)" stroke-width="5"/>
-  <circle cx="32" cy="32" r="4.5" fill="hsl(219 92% 64%)"/>
+  <!-- The TV monogram. Kept in step with src/components/portfolio/Logo.jsx
+       and the mark in cv-source/thanh-vu-cv.html: change one, change all three. -->
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0.65" y2="1">
+      <stop offset="0" stop-color="#1B2742"/>
+      <stop offset="0.55" stop-color="#101827"/>
+      <stop offset="1" stop-color="#080B12"/>
+    </linearGradient>
+    <linearGradient id="lit" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#CFE0FF"/>
+      <stop offset="1" stop-color="#6FA3FB"/>
+    </linearGradient>
+    <linearGradient id="deep" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#5B93F9"/>
+      <stop offset="1" stop-color="#2154C4"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="15" fill="url(#tile)"/>
+  <rect x="0.6" y="0.6" width="62.8" height="62.8" rx="14.4" fill="none" stroke="url(#rim)" stroke-width="1.2"/>
+
+  <!-- Sized a little larger than the on-site logo: a browser tab renders this
+       at 16px, where thin facets close up and the mark turns to mush. -->
+  <g transform="translate(32 32) scale(0.98) translate(-32 -37)">
+    <path d="M13 16 H51 V23 H13 Z" fill="url(#lit)"/>
+    <path d="M16 25 L32 49 L48 25 L48 34 L32 58 L16 34 Z" fill="url(#deep)"/>
+    <path d="M28.5 23 H35.5 V40 L32 45 L28.5 40 Z" fill="url(#lit)"/>
+  </g>
 </svg>
