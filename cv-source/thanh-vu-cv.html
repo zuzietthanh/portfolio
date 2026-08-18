@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vu Viet Thanh — Curriculum Vitae</title>
+<style>
+  /* ------------------------------------------------------------------
+     Source file for the CV PDF. Edit this, then re-export with:
+       npm run cv
+     which writes public/documents/thanh-vu-cv.pdf
+     ------------------------------------------------------------------ */
+
+  @page { size: A4; margin: 0; }
+
+  :root {
+    --ink:        #14161C;   /* body text on white          */
+    --ink-soft:   #4A5060;   /* secondary text on white     */
+    --rule:       #DFE3EB;   /* hairlines                   */
+    --panel:      #1B1E27;   /* dark sidebar                */
+    --panel-soft: #A8AEBE;   /* secondary text on the panel */
+    --blue:       #1D62D8;   /* accent on white             */
+    --blue-lift:  #5B95F9;   /* accent on the dark panel    */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    display: flex;
+    font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9.2pt;
+    line-height: 1.42;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  /* ============================ SIDEBAR ============================ */
+
+  .panel {
+    width: 62mm;
+    flex: 0 0 62mm;
+    background: var(--panel);
+    color: #fff;
+    padding: 13mm 8mm 12mm;
+  }
+
+  /* The portrait. Drop a file named photo.jpg into this same folder and
+     re-export — it paints over the monogram automatically. No photo, no
+     broken image: the monogram simply stays visible. */
+  .portrait {
+    width: 38mm;
+    height: 38mm;
+    margin: 0 auto 11mm;
+    border-radius: 50%;
+    border: 1.2mm solid #fff;
+    background-color: #2C3140;
+    background-image: url("photo.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .monogram {
+    font-size: 15pt;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--blue-lift);
+  }
+
+  .panel h2 {
+    font-size: 8.4pt;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue-lift);
+    margin-bottom: 3.4mm;
+  }
+  .panel section + section { margin-top: 9mm; }
+
+  .field      { margin-bottom: 3.2mm; }
+  .field-key  {
+    font-size: 7.4pt;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--panel-soft);
+    margin-bottom: 0.5mm;
+  }
+  .field-val  { font-size: 8.8pt; color: #fff; word-break: break-word; }
+
+  .panel ul { list-style: none; }
+  .panel li {
+    position: relative;
+    padding-left: 3.6mm;
+    margin-bottom: 2.1mm;
+    font-size: 8.8pt;
+    color: #EDEFF4;
+  }
+  .panel li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.55mm;
+    width: 1.5mm;
+    height: 1.5mm;
+    border-radius: 50%;
+    background: var(--blue-lift);
+  }
+  .panel li span { display: block; font-size: 7.6pt; color: var(--panel-soft); }
+
+  /* ============================== MAIN ============================== */
+
+  .main { flex: 1; padding: 13mm 12mm 12mm 11mm; min-width: 0; }
+
+  .name {
+    font-size: 25pt;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.06;
+  }
+  .title {
+    font-size: 10.4pt;
+    color: var(--blue);
+    font-weight: 500;
+    margin-top: 1.6mm;
+  }
+  .profile {
+    margin-top: 4.2mm;
+    padding-top: 4.2mm;
+    border-top: 0.35mm solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 9pt;
+    line-height: 1.5;
+  }
+
+  .main section { margin-top: 7.4mm; }
+  .main h2 {
+    font-size: 8.6pt;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding-bottom: 1.5mm;
+    margin-bottom: 3.6mm;
+    border-bottom: 0.5mm solid var(--blue);
+  }
+
+  .entry { margin-bottom: 4.4mm; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4mm;
+  }
+  .entry-role { font-size: 9.6pt; font-weight: 600; }
+  .entry-when {
+    font-size: 8pt;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .entry-where { font-size: 8.8pt; color: var(--blue); margin-top: 0.3mm; }
+  .entry-note  { font-size: 8.7pt; color: var(--ink-soft); margin-top: 1mm; }
+
+  .award { display: flex; gap: 3mm; margin-bottom: 2.6mm; font-size: 8.7pt; }
+  .award:last-child { margin-bottom: 0; }
+  .award-key {
+    flex: 0 0 30mm;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .award-val { color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+  <aside class="panel">
+    <div class="portrait"><span class="monogram">VT</span></div>
+
+    <section>
+      <h2>Contact</h2>
+      <div class="field">
+        <div class="field-key">Email</div>
+        <div class="field-val">vut24595@gmail.com</div>
+      </div>
+      <div class="field">
+        <div class="field-key">LinkedIn</div>
+        <div class="field-val">linkedin.com/in/zuzietthanh</div>
+      </div>
+      <div class="field">
+        <div class="field-key">Location</div>
+        <div class="field-val">Hanoi, Vietnam</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <ul>
+        <li>Vietnamese<span>Native</span></li>
+        <li>English<span>IELTS 7.0 — Listening 8.0</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <ul>
+        <li>Bilingual communication<span>Vietnamese and English</span></li>
+        <li>Written English &amp; copywriting</li>
+        <li>Event promotion</li>
+        <li>Team collaboration</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Interests</h2>
+      <ul>
+        <li>Basketball</li>
+        <li>Community volunteering</li>
+      </ul>
+    </section>
+  </aside>
+
+  <main class="main">
+    <header>
+      <h1 class="name">Vu Viet Thanh</h1>
+      <div class="title">Business Administration Student &middot; Marketing Focus</div>
+      <p class="profile">
+        Third-year Business Administration student at VinUniversity, concentrating in
+        marketing and studying on a 70% merit scholarship. Bilingual in Vietnamese and
+        English, with club marketing and community volunteering experience. Looking for a
+        marketing internship where I can contribute to content and campaign work.
+      </p>
+    </header>
+
+    <section>
+      <h2>Education</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-role">Business Administration &middot; Marketing concentration</div>
+          <div class="entry-when">2024 &ndash; 2028</div>
+        </div>
+        <div class="entry-where">VinUniversity, Hanoi</div>
+        <div class="entry-note">
+          Third year, expected graduation 2028. Admitted with a 70% merit scholarship.
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-role">English-specialised programme</div>
+          <div class="entry-when">2021 &ndash; 2024</div>
+        </div>
+        <div class="entry-where">Le Quy Don High School for the Gifted, Ninh Thuan</div>
+        <div class="entry-note">
+          Selective English stream. Graduated with 8.8/10 in English in the 2024 National
+          High School Graduation Examination.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Leadership &amp; Activities</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-role">Marketing Team Member</div>
+          <div class="entry-when">2021 &ndash; 2024</div>
+        </div>
+        <div class="entry-where">Badminton Club, Le Quy Don High School for the Gifted</div>
+        <div class="entry-note">
+          Promoted club events and recruitment drives to the student body, producing
+          announcements and social posts across the school year.
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-role">Specialist Board Member</div>
+          <div class="entry-when">2023 &ndash; 2024</div>
+        </div>
+        <div class="entry-where">Olympian Club, Kane Cinema</div>
+        <div class="entry-note">
+          Contributed to the club's subject-matter team, preparing content and supporting
+          member activities.
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-role">Volunteer</div>
+          <div class="entry-when">April 2024</div>
+        </div>
+        <div class="entry-where">Volunteer For Education &mdash; Ha Giang programme</div>
+        <div class="entry-note">
+          Joined a field trip to Ha Giang province supporting education outreach in
+          remote communities.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Achievements</h2>
+
+      <div class="award">
+        <div class="award-key">English</div>
+        <div class="award-val">
+          IELTS 7.0 (Listening 8.0, Reading 7.0) &middot; 8.8/10 National High School
+          Graduation Examination 2024 &middot; 9.25/10 in the high school entrance examination
+        </div>
+      </div>
+      <div class="award">
+        <div class="award-key">Competition</div>
+        <div class="award-val">
+          Third Prize at both provincial and city level, IOE &mdash; Vietnam's national
+          online English olympiad
+        </div>
+      </div>
+      <div class="award">
+        <div class="award-key">Athletics</div>
+        <div class="award-val">
+          Gold Medal in Basketball, Phu Dong Provincial Games
+        </div>
+      </div>
+      <div class="award">
+        <div class="award-key">Scholarships</div>
+        <div class="award-val">
+          70% merit scholarship, VinUniversity &middot; USD 15,000, James Madison University
+          &middot; USD 12,000, George Mason University &middot; 50% merit scholarship, FPT University
+        </div>
+      </div>
+      <div class="award">
+        <div class="award-key">Offers received</div>
+        <div class="award-val">
+          University of Waikato, University of Otago and Massey University (New Zealand)
+          &middot; VNU University of Economics and Business &middot; VNU University of Languages
+          and International Studies
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

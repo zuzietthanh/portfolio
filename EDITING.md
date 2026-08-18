@@ -164,6 +164,29 @@ The path always starts with `/documents/`. If your file is called
 `My CV Final.pdf`, **rename it** to something with no spaces, like
 `thanh-vu-cv.pdf`, then use that name.
 
+### Editing the CV that is already there
+
+Your CV was rebuilt in code so it stays editable, rather than being a picture
+you cannot change. The design lives in **`cv-source/thanh-vu-cv.html`**.
+
+To change it: open that file, edit the text between the `>` and `<` marks
+(ignore everything else), save, then run:
+
+```bash
+npm run cv
+```
+
+That regenerates `public/documents/thanh-vu-cv.pdf` and the site picks it up
+straight away.
+
+**To add your photo:** save it as `photo.jpg` inside the `cv-source/` folder,
+then run `npm run cv` again. It drops into the circle automatically. Until you
+do, the circle shows your initials instead — nothing looks broken.
+
+If you would rather write your CV in Word, that is completely fine. Export it
+as a PDF, put it in `public/documents/`, and point `file_url` at it. You can
+then delete the `cv-source` folder.
+
 ### Writing the revision story
 
 ```json

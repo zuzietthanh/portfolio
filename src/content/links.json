@@ -1,34 +1,18 @@
 [
   {
-    "id": "github",
-    "label": "GitHub",
-    "url": "https://github.com/example",
-    "icon": "github",
-    "sort_order": 1,
-    "is_published": true
-  },
-  {
     "id": "linkedin",
     "label": "LinkedIn",
-    "url": "https://www.linkedin.com/in/example",
+    "url": "https://www.linkedin.com/in/zuzietthanh",
     "icon": "linkedin",
-    "sort_order": 2,
+    "sort_order": 1,
     "is_published": true
   },
   {
     "id": "email",
     "label": "Email",
-    "url": "your.email@example.com",
+    "url": "vut24595@gmail.com",
     "icon": "email",
-    "sort_order": 3,
-    "is_published": true
-  },
-  {
-    "id": "website",
-    "label": "Personal Site",
-    "url": "https://example.com",
-    "icon": "globe",
-    "sort_order": 4,
+    "sort_order": 2,
     "is_published": true
   }
 ]

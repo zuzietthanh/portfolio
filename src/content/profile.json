@@ -1,12 +1,12 @@
 {
-  "_comment": "Your details. Only 'name' is filled in for real — replace the rest. See EDITING.md.",
+  "_comment": "Your details. See EDITING.md for what each field does.",
   "name": "Thanh Vu",
-  "role": "Undergraduate Marketing Student",
+  "role": "Business Administration Student",
   "tagline": "Open to marketing internships and entry-level roles",
   "years_experience": 0,
   "specialty": "Marketing",
-  "summary": "<p>Replace this with two or three sentences about yourself: what you're studying in marketing, what you're good at (e.g. social media, brand strategy, market research, content), and what kind of internship or role you're looking for. The first 180 characters appear on the home page, so put the important part first.</p>",
-  "email": "your.email@example.com",
-  "location": "",
+  "summary": "<p>I'm a third-year Business Administration student at VinUniversity, concentrating in marketing. I work in Vietnamese and English, and I'm looking for a marketing internship.</p>",
+  "email": "vut24595@gmail.com",
+  "location": "Hanoi, Vietnam",
   "avatar_url": "/images/avatar.svg"
 }

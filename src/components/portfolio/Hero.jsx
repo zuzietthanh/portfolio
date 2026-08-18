@@ -21,6 +21,13 @@ export default function Hero({ profile }) {
 
   const summary = profile?.summary?.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
+  // Trim to roughly 180 characters, but break on a space so a long summary
+  // never gets cut mid-word ("and I'm loo…").
+  const blurb =
+    summary && summary.length > 180
+      ? `${summary.slice(0, 180).replace(/\s+\S*$/, "")}…`
+      : summary;
+
   return (
     <section
       id="hero"
@@ -67,14 +74,14 @@ export default function Hero({ profile }) {
           )}
         </motion.h1>
 
-        {summary && (
+        {blurb && (
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            {summary.length > 180 ? `${summary.slice(0, 180).trimEnd()}…` : summary}
+            {blurb}
           </motion.p>
         )}
 
