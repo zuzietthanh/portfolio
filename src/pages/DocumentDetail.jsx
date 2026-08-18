@@ -80,6 +80,14 @@ export default function DocumentDetail() {
   const process = Array.isArray(doc.process_evidence) ? doc.process_evidence : [];
   const feedback = Array.isArray(doc.peer_feedback) ? doc.peer_feedback : [];
 
+  // The brief asks each document page for a revision narrative and peer
+  // feedback, but a heading above empty placeholder text reads as unfinished
+  // work. So each section only appears once there is something real in
+  // documents.json to put under it — fill the content in and it comes back on
+  // its own.
+  const hasRevision = Boolean(doc.revision_narrative) || process.length > 0;
+  const hasFeedback = feedback.length > 0;
+
   return (
     <div className="min-h-screen">
       <NavigationRay profile={profile} cvUrl={cvDoc?.file_url} />
@@ -175,74 +183,68 @@ export default function DocumentDetail() {
           </section>
 
           {/* 2 — revision narrative and evidence of process */}
-          <section className="mt-16 scroll-mt-28">
-            <SectionHeading
-              icon={History}
-              title="How it changed"
-              subtitle="The revision story, and the drafts behind it."
-            />
-
-            {doc.revision_narrative && (
-              <div
-                className="space-y-4 text-base leading-relaxed text-foreground/90 [&_a]:text-primary [&_a]:underline [&_strong]:font-semibold [&_strong]:text-foreground"
-                dangerouslySetInnerHTML={{ __html: doc.revision_narrative }}
+          {hasRevision && (
+            <section className="mt-16 scroll-mt-28">
+              <SectionHeading
+                icon={History}
+                title="How it changed"
+                subtitle="The revision story, and the drafts behind it."
               />
-            )}
 
-            {process.length > 0 && (
-              <ol className="mt-8 space-y-3">
-                {process.map((step, index) => (
-                  <li
-                    key={`${step.label}-${index}`}
-                    className="rounded-2xl glass p-5 transition-colors hover:bg-white/[0.07]"
-                  >
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <h3 className="font-display text-base font-medium text-foreground">
-                        {step.label}
-                      </h3>
-                      {step.date && (
-                        <span className="font-mono text-xs text-muted-foreground">{step.date}</span>
+              {doc.revision_narrative && (
+                <div
+                  className="space-y-4 text-base leading-relaxed text-foreground/90 [&_a]:text-primary [&_a]:underline [&_strong]:font-semibold [&_strong]:text-foreground"
+                  dangerouslySetInnerHTML={{ __html: doc.revision_narrative }}
+                />
+              )}
+
+              {process.length > 0 && (
+                <ol className="mt-8 space-y-3">
+                  {process.map((step, index) => (
+                    <li
+                      key={`${step.label}-${index}`}
+                      className="rounded-2xl glass p-5 transition-colors hover:bg-white/[0.07]"
+                    >
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <h3 className="font-display text-base font-medium text-foreground">
+                          {step.label}
+                        </h3>
+                        {step.date && (
+                          <span className="font-mono text-xs text-muted-foreground">{step.date}</span>
+                        )}
+                      </div>
+                      {step.note && (
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                          {step.note}
+                        </p>
                       )}
-                    </div>
-                    {step.note && (
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {step.note}
-                      </p>
-                    )}
-                    {step.file_url && (
-                      <a
-                        href={step.file_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-                      >
-                        <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                        View this version
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ol>
-            )}
-          </section>
+                      {step.file_url && (
+                        <a
+                          href={step.file_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                          View this version
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </section>
+          )}
 
           {/* 3 — peer feedback */}
-          <section className="mt-16 scroll-mt-28">
-            <SectionHeading
-              icon={MessageSquareQuote}
-              title="Peer feedback"
-              subtitle="What reviewers said, and what I did about it."
-            />
+          {hasFeedback && (
+            <section className="mt-16 scroll-mt-28">
+              <SectionHeading
+                icon={MessageSquareQuote}
+                title="Peer feedback"
+                subtitle="What reviewers said, and what I did about it."
+              />
 
-            {feedback.length === 0 ? (
-              <p className="rounded-2xl border border-border bg-card p-6 text-muted-foreground">
-                No peer feedback recorded yet. Add it to{" "}
-                <code className="font-mono text-sm text-foreground">
-                  src/content/documents.json
-                </code>
-                .
-              </p>
-            ) : (
               <ul className="space-y-4">
                 {feedback.map((item, index) => (
                   <li key={`${item.reviewer}-${index}`} className="rounded-2xl glass p-5 sm:p-6">
@@ -274,8 +276,8 @@ export default function DocumentDetail() {
                   </li>
                 ))}
               </ul>
-            )}
-          </section>
+            </section>
+          )}
 
           <nav
             aria-label="Continue"

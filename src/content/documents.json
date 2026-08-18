@@ -1,41 +1,15 @@
 [
   {
-    "_comment": "Each document needs three things to meet the brief: the final file, a revision narrative with evidence of process, and peer feedback. Replace the placeholder text — keep the shape.",
+    "_comment": "The brief wants three things on each document page: the final file, a revision narrative with evidence of process, and peer feedback. The last two are empty here on purpose, so those sections stay hidden — fill any of them in and the section comes back by itself. A draft of the CV revision narrative is parked in REVISION-DRAFTS.md.",
     "id": "cv",
     "title": "Curriculum Vitae",
     "type": "cv",
     "file_url": "/documents/thanh-vu-cv.pdf",
     "description": "Education, activities, and achievements on one page.",
     "summary": "A one-page CV aimed at marketing internships. It leads with my degree and the activities where I actually did marketing work, then condenses my academic awards, so an employer reads what I can do before they read what I have won.",
-    "revision_narrative": "<p>DRAFT — this is a factual account of what changed. Extend it in your own words before you submit.</p><p>My first version was written in Vietnamese and was really a personal profile card: a photo, my date of birth, and a list of fifteen separate achievements. It was the right document for a university application, because every item on it was an admissions result — IOE prizes, IELTS, exam scores, scholarship offers, and the universities that accepted me.</p><p>It was the wrong document for a job. An employer reading it would learn what I scored at seventeen and nothing about what I can do. There was no experience section at all, and the fifteen awards took up so much of the page that the three activities where I had done real marketing work were buried at the bottom.</p><p>So I rewrote it in English around what an employer is looking for. I added a two-line profile at the top stating what I study and what I want. I promoted my club and volunteering roles into a proper <strong>Leadership &amp; Activities</strong> section with a line each on what I actually did. I condensed the fifteen awards into five grouped lines — English, competition, athletics, scholarships, offers — which kept every fact but cut the space they occupy by roughly two thirds. I also removed my date of birth and phone number, which employers do not need and which do not belong on a page that lives on a public website.</p><p><em>Add here: anything you were unsure about, and anything you decided to keep even though you were advised to cut it.</em></p>",
-    "process_evidence": [
-      {
-        "label": "Version 1 — Vietnamese profile card",
-        "date": "Before revision",
-        "note": "A personal profile in Vietnamese: photo, date of birth, and fifteen achievements listed one per line. No experience section and no statement of what I was applying for.",
-        "file_url": ""
-      },
-      {
-        "label": "Version 2 — English, restructured",
-        "date": "Current",
-        "note": "Rebuilt in English for a job application: profile statement, education, a Leadership & Activities section, and the awards condensed into five grouped lines.",
-        "file_url": "/documents/thanh-vu-cv.pdf"
-      }
-    ],
-    "peer_feedback": [
-      {
-        "reviewer": "Peer reviewer 1",
-        "date": "Week 3",
-        "comment": "PLACEHOLDER — paste or paraphrase what your reviewer actually said. Keep it specific; vague praise is not evidence.",
-        "response": "PLACEHOLDER — what you did about it. It is fine to say you disagreed and kept it as it was, as long as you explain your reasoning."
-      },
-      {
-        "reviewer": "Peer reviewer 2",
-        "date": "Week 5",
-        "comment": "PLACEHOLDER — a second piece of feedback.",
-        "response": "PLACEHOLDER — how you responded."
-      }
-    ],
+    "revision_narrative": "",
+    "process_evidence": [],
+    "peer_feedback": [],
     "sort_order": 1,
     "is_published": true
   },

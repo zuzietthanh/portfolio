@@ -187,6 +187,21 @@ If you would rather write your CV in Word, that is completely fine. Export it
 as a PDF, put it in `public/documents/`, and point `file_url` at it. You can
 then delete the `cv-source` folder.
 
+### Sections appear only when you fill them in
+
+A document page can show three things: the file, **How it changed**, and
+**Peer feedback**. The last two are required by your assignment, but an empty
+heading looks worse than no heading — so each one **stays hidden until there is
+something real in it**.
+
+Fill in `revision_narrative`, `process_evidence`, or `peer_feedback` and the
+matching section appears on the page by itself. Empty them and it disappears
+again. There is no code to change either way.
+
+Your CV page is currently in that state: it shows the CV and nothing else. A
+draft of its revision story is parked in **`REVISION-DRAFTS.md`**, ready to
+paste back in when you want it.
+
 ### Writing the revision story
 
 ```json
