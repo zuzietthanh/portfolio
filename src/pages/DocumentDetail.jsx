@@ -8,12 +8,12 @@ import {
   FileText,
   Mail,
   FileSpreadsheet,
+  MessageSquareQuote,
   History,
 } from "lucide-react";
 import { getProfile, getDocument, getDocuments } from "@/lib/content";
 import NavigationRay from "@/components/portfolio/NavigationRay";
 import Footer from "@/components/portfolio/Footer";
-import PeerFeedback from "@/components/portfolio/PeerFeedback";
 
 const TYPE_CONFIG = {
   cv: { icon: FileText, label: "CV" },
@@ -80,12 +80,11 @@ export default function DocumentDetail() {
   const process = Array.isArray(doc.process_evidence) ? doc.process_evidence : [];
   const feedback = Array.isArray(doc.peer_feedback) ? doc.peer_feedback : [];
 
-  // The revision section only appears once documents.json has something real to
-  // put under it — a heading above placeholder text reads as unfinished work.
-  // Peer feedback is the exception: it always renders, because the reserved
-  // slots and the submission form are themselves the evidence that the document
-  // is open for review.
+  // Each section only appears once documents.json has something real to put
+  // under it — a heading above placeholder text reads as unfinished work.
+  // Fill the content in and the section comes back on its own.
   const hasRevision = Boolean(doc.revision_narrative) || process.length > 0;
+  const hasFeedback = feedback.length > 0;
 
   return (
     <div className="min-h-screen">
@@ -235,9 +234,50 @@ export default function DocumentDetail() {
             </section>
           )}
 
-          {/* 3 — peer feedback: hand-written entries from documents.json,
-              plus anything submitted through the form and approved in /review. */}
-          <PeerFeedback docId={doc.id} staticFeedback={feedback} />
+          {/* 3 — peer feedback */}
+          {hasFeedback && (
+            <section className="mt-16 scroll-mt-28">
+              <SectionHeading
+                icon={MessageSquareQuote}
+                title="Peer feedback"
+                subtitle="What reviewers said, and what I did about it."
+              />
+
+              <ul className="space-y-4">
+                {feedback.map((item, index) => (
+                  <li key={`${item.reviewer}-${index}`} className="rounded-2xl glass p-5 sm:p-6">
+                    <figure>
+                      <blockquote className="border-l-2 border-primary/40 pl-4 text-base italic leading-relaxed text-foreground/90">
+                        {item.comment}
+                      </blockquote>
+                      <figcaption className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+                        <span className="font-medium text-foreground">{item.reviewer}</span>
+                        {item.date && (
+                          <>
+                            <span aria-hidden="true" className="text-muted-foreground">
+                              ·
+                            </span>
+                            <span>{item.date}</span>
+                          </>
+                        )}
+                      </figcaption>
+                    </figure>
+
+                    {item.response && (
+                      <div className="mt-4 border-t border-border/60 pt-4">
+                        <p className="mb-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+                          What I did
+                        </p>
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                          {item.response}
+                        </p>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <nav
             aria-label="Continue"

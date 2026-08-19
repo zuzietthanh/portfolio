@@ -8,7 +8,6 @@ import Home from '@/pages/Home';
 import ProjectDetail from '@/pages/ProjectDetail';
 import StatementOfPurpose from '@/pages/StatementOfPurpose';
 import DocumentDetail from '@/pages/DocumentDetail';
-import ReviewQueue from '@/pages/ReviewQueue';
 
 function App() {
   return (
@@ -21,8 +20,6 @@ function App() {
           <Route path="/statement-of-purpose" element={<StatementOfPurpose />} />
           <Route path="/document/:id" element={<DocumentDetail />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
-          {/* Private moderation queue. Not linked from anywhere and marked noindex. */}
-          <Route path="/review" element={<ReviewQueue />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </ContentErrorBoundary>
