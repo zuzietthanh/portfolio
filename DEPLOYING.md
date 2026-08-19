@@ -243,6 +243,63 @@ easiest mistake to make: the website updates but the PDF stays old.
 
 ---
 
+## Switching on the peer-review form
+
+Each document page has a **Leave a review** form. A classmate fills it in, it
+lands in a private queue at `/review`, and it only appears on your site once
+you publish it there. Nothing a stranger types goes live on its own.
+
+Until you do the two steps below, the form politely says feedback is not
+switched on yet. **The reserved reviewer slots and the form itself still show**,
+so the page already demonstrates that peer review exists.
+
+### 1. Add a database
+
+Vercel dashboard → your project → **Storage** → **Create Database** →
+**Upstash for Redis** → **Free** plan → **Connect** to your project.
+
+Vercel adds the connection details to your project by itself. You do not copy
+or paste any keys.
+
+### 2. Set your password
+
+Vercel dashboard → your project → **Settings** → **Environment Variables**
+
+| Field | Value |
+| --- | --- |
+| Key | `ADMIN_PASSWORD` |
+| Value | any password you invent |
+| Environments | tick all three |
+
+Click **Save**. Then go to **Deployments**, open the most recent one, and choose
+**Redeploy** — environment variables only reach a build that starts after they
+are saved.
+
+### Using it
+
+Go to `your-site.vercel.app/review` and enter that password. Each waiting
+comment has a box for your reply — that reply is what appears under their
+comment as **What I did**, which is exactly what your brief asks for. Then
+press **Publish**.
+
+That page is not linked from anywhere on your site and is marked so search
+engines skip it. Anyone who guesses the address still needs the password.
+
+### Trying it on your own computer first
+
+Create a file called `.env.local` next to `package.json` containing:
+
+```
+ADMIN_PASSWORD=whatever-you-like
+```
+
+Then `npm run dev`. The form and `/review` both work locally, storing feedback
+in memory — it clears when you stop the server, which is exactly what you want
+for testing. `.env.local` is ignored by git, so your password never leaves your
+computer.
+
+---
+
 ## Getting a nicer web address
 
 `portfolio-abc123.vercel.app` is ugly. You can rename it free:
