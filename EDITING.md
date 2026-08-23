@@ -187,6 +187,24 @@ If you would rather write your CV in Word, that is completely fine. Export it
 as a PDF, put it in `public/documents/`, and point `file_url` at it. You can
 then delete the `cv-source` folder.
 
+### Editing your cover letter
+
+Same setup as the CV: the design lives in
+**`cv-source/thanh-vu-cover-letter.html`**. Edit the text, save, then run:
+
+```bash
+npm run cover-letter
+```
+
+That regenerates `public/documents/thanh-vu-cover-letter.pdf`.
+
+**Before you submit:** your cover letter still has bracket placeholders —
+`[Company Name]`, `[Hiring Manager Name]`, and so on. Fill in a real company
+before this is final; a downloadable letter with brackets in it looks
+unfinished to anyone who opens it. Once you know where you are applying,
+replace each `[bracket]` in the HTML file with the real detail and run
+`npm run cover-letter` again.
+
 ### Sections appear only when you fill them in
 
 A document page can show three things: the file, **How it changed**, and

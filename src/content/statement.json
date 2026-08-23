@@ -1,5 +1,5 @@
 {
-  "_comment": "Your Statement of Purpose. The three sections below are the three things the assignment requires — keep all three, replace the text inside each. Basic HTML works: <p>, <strong>, <em>, <ul>, <li>.",
+  "_comment": "Your Statement of Purpose. The three required sections are Goals, Artifact Descriptions (id: overview), and Personal Growth (id: growth) — the rubric grades exactly these three, so keep all three and don't rename the ids. This is your own final wording (452 words, under the 500 limit) — edit it directly if it changes again. Basic HTML works: <p>, <strong>, <em>, <ul>, <li>.",
   "title": "Statement of Purpose",
   "eyebrow": "Required Artifact",
   "intro": "A short reflection on where I am heading, what I chose to put in this portfolio, and why those pieces matter.",
@@ -9,19 +9,19 @@
       "id": "goals",
       "heading": "My goals",
       "summary": "Short-term and long-term, professional and academic.",
-      "body": "<p>PLACEHOLDER — replace this with your own writing.</p><p>Write about where you want to be in the next year or two: the kind of marketing internship or graduate role you are aiming for, and the specific skills you want to build (for example brand strategy, campaign analytics, or content production).</p><p>Then write about the longer term: the kind of marketer you want to become, the industry or type of organisation you want to work in, and any further study you are considering.</p><p><strong>Be specific.</strong> \"I want to work in marketing\" says very little. \"I want to work on brand campaigns for sustainable consumer goods, because…\" says a lot.</p>"
+      "body": "<p>In the short term, I would like to find a marketing internship for next summer, ideally one where I can work on brand or campaign strategy directly rather than just supporting it. I have some experience with running promotion and event marketing for my badminton club at my former high school. In the long term, I hope to work in brand and campaign strategy for companies in the tech industry, since science and technology are two things I'm genuinely passionate about. I'm currently studying Business Administration with a concentration in Marketing at VinUniversity, on a merit scholarship.</p><p>This class is practical enough to translate directly into making a CV, writing a cover letter, and building a professional LinkedIn page &mdash; the first \"real life\" tools I can use to get in front of people who might actually hire me.</p>"
     },
     {
       "id": "overview",
       "heading": "Why these documents",
       "summary": "The package I chose and what each piece is doing here.",
-      "body": "<p>PLACEHOLDER — replace this with your own writing.</p><p>Explain that you chose the <strong>Job Seeking</strong> package, and why that fits where you are right now rather than the Study Exchange route.</p><p>Then take each of the three documents in turn — your CV, your cover letter, and your LinkedIn profile — and say what each one is meant to show about you that the others do not. A grader is looking for evidence that you chose deliberately, not that you filled three slots.</p><p>Mention what changed between drafts, and what a piece of peer feedback made you rethink.</p>"
+      "body": "<p>I chose the Job Seeking package over the Study Exchange package because I'm not applying anywhere &mdash; I'm trying to get a job. These three documents are what an employer sees before contacting me about a role.</p><p>My CV changed the most. Initially, I had included a personal profile (including photo and date of birth) followed by a list of my academic achievements. That's suitable for a university application, but not for job seeking, since it says nothing about the work I'm actually capable of doing. I restructured the CV to lead with Education, then Leadership &amp; Activities, and Awards last. I also consolidated fifteen individual awards into five grouped lines so they don't dominate the page.</p><p>I wrote the Marketing Specialist cover letter in concrete terms rather than generic ones. My LinkedIn profile is the version of me that shows up first when someone searches my name, so it has to hold up without me there to explain it.</p>"
     },
     {
-      "id": "future",
-      "heading": "How this connects to my future",
-      "summary": "The link between these artifacts and where I am going.",
-      "body": "<p>PLACEHOLDER — replace this with your own writing.</p><p>Tie the two sections above together. How do these specific documents move you toward the goals you described? What will you do with them after this class — which roles will you actually apply to, and what still needs work before you do?</p><p>This is the reflective part, so it is fine to name a weakness. Writing \"my CV still leans on coursework because I have limited industry experience, so my next step is…\" reads as self-aware, not as a gap.</p>"
+      "id": "growth",
+      "heading": "How I've grown as a writer",
+      "summary": "What changed in how I write, and what still needs work.",
+      "body": "<p>Initially I saw the CV and the portfolio as two lists of all my work ever. However, through this assignment, I've realized the CV is meant to grab an employer's attention in the first ten seconds. The portfolio is meant to prove the claims I make in my CV. So my CV and this portfolio site ended up built for different audiences and purposes.</p><p>The best feedback I got in my third peer review was on my CV's accomplishments section. First, I only wrote out what I did &mdash; not what it produced. So I went back through every bullet on my CV. Finding real numbers for some of them was harder than I expected, so I either added numbers to support the claim or cut the line entirely. I'm not sure every claim on my CV can be fully quantified, but that's the honest gap I'm bringing into whatever I write next.</p>"
     }
   ]
 }

@@ -18,31 +18,11 @@
     "title": "Cover Letter",
     "type": "cover_letter",
     "file_url": "/documents/thanh-vu-cover-letter.pdf",
-    "description": "A tailored introduction for the roles I am applying to.",
-    "summary": "A cover letter written for a specific marketing internship rather than a generic template, so it can show how I connect my coursework to what an employer actually asked for.",
-    "revision_narrative": "<p>PLACEHOLDER — replace with your own account.</p><p>Explain how the letter started and how it ended up. Cover letters usually improve by getting more specific: naming the organisation, referencing something real about it, and cutting sentences that could appear in anyone's letter.</p><p>Say what you removed and why it was not doing any work.</p>",
-    "process_evidence": [
-      {
-        "label": "Draft 1",
-        "date": "Week 3",
-        "note": "PLACEHOLDER — the first attempt and what was generic about it.",
-        "file_url": ""
-      },
-      {
-        "label": "Final",
-        "date": "Week 6",
-        "note": "PLACEHOLDER — what made the final version specific.",
-        "file_url": "/documents/thanh-vu-cover-letter.pdf"
-      }
-    ],
-    "peer_feedback": [
-      {
-        "reviewer": "Peer reviewer 1",
-        "date": "Week 4",
-        "comment": "PLACEHOLDER — what your reviewer said about the letter.",
-        "response": "PLACEHOLDER — what you changed as a result."
-      }
-    ],
+    "description": "An introduction for the marketing roles I am applying to.",
+    "summary": "A cover letter for a Marketing Specialist role, connecting the marketing and content work I did in high school clubs to what that kind of position actually needs.",
+    "revision_narrative": "",
+    "process_evidence": [],
+    "peer_feedback": [],
     "sort_order": 2,
     "is_published": true
   },
