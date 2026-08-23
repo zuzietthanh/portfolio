@@ -38,8 +38,8 @@ function DocumentTile({ doc, index }) {
       )}
 
       {/* Two distinct actions rather than a card-wide link wrapping a button:
-          the detail page carries the revision story and peer feedback, while
-          the download stays one click away for anyone who only wants the file. */}
+          the detail page carries the inline preview, while the download
+          stays one click away for anyone who only wants the file. */}
       <div className="mt-6 flex flex-col gap-2 pt-2">
         <Link
           to={`/document/${doc.id}`}
@@ -84,12 +84,8 @@ export default function DocumentHub({ documents }) {
           <h2 className="font-display text-3xl font-medium tracking-tight text-foreground md:text-5xl">
             Documents
           </h2>
-          {/* Deliberately does not promise a revision story on every document:
-              those sections only appear once documents.json has one, so a
-              blanket claim here would be contradicted by the page it links to. */}
           <p className="mt-4 max-w-lg text-muted-foreground">
-            The documents behind my applications, each on its own page with the final file and the
-            story of how it got there.
+            The documents behind my applications, each on its own page with the final file.
           </p>
         </motion.div>
 

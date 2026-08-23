@@ -8,8 +8,6 @@ import {
   FileText,
   Mail,
   FileSpreadsheet,
-  MessageSquareQuote,
-  History,
 } from "lucide-react";
 import { getProfile, getDocument, getDocuments } from "@/lib/content";
 import NavigationRay from "@/components/portfolio/NavigationRay";
@@ -77,14 +75,6 @@ export default function DocumentDetail() {
 
   const config = TYPE_CONFIG[doc.type] || TYPE_CONFIG.other;
   const TypeIcon = config.icon;
-  const process = Array.isArray(doc.process_evidence) ? doc.process_evidence : [];
-  const feedback = Array.isArray(doc.peer_feedback) ? doc.peer_feedback : [];
-
-  // Each section only appears once documents.json has something real to put
-  // under it — a heading above placeholder text reads as unfinished work.
-  // Fill the content in and the section comes back on its own.
-  const hasRevision = Boolean(doc.revision_narrative) || process.length > 0;
-  const hasFeedback = feedback.length > 0;
 
   return (
     <div className="min-h-screen">
@@ -179,105 +169,6 @@ export default function DocumentDetail() {
               </div>
             </div>
           </section>
-
-          {/* 2 — revision narrative and evidence of process */}
-          {hasRevision && (
-            <section className="mt-16 scroll-mt-28">
-              <SectionHeading
-                icon={History}
-                title="How it changed"
-                subtitle="The revision story, and the drafts behind it."
-              />
-
-              {doc.revision_narrative && (
-                <div
-                  className="space-y-4 text-base leading-relaxed text-foreground/90 [&_a]:text-primary [&_a]:underline [&_strong]:font-semibold [&_strong]:text-foreground"
-                  dangerouslySetInnerHTML={{ __html: doc.revision_narrative }}
-                />
-              )}
-
-              {process.length > 0 && (
-                <ol className="mt-8 space-y-3">
-                  {process.map((step, index) => (
-                    <li
-                      key={`${step.label}-${index}`}
-                      className="rounded-2xl glass p-5 transition-colors hover:bg-white/[0.07]"
-                    >
-                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <h3 className="font-display text-base font-medium text-foreground">
-                          {step.label}
-                        </h3>
-                        {step.date && (
-                          <span className="font-mono text-xs text-muted-foreground">{step.date}</span>
-                        )}
-                      </div>
-                      {step.note && (
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                          {step.note}
-                        </p>
-                      )}
-                      {step.file_url && (
-                        <a
-                          href={step.file_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-                        >
-                          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                          View this version
-                        </a>
-                      )}
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </section>
-          )}
-
-          {/* 3 — peer feedback */}
-          {hasFeedback && (
-            <section className="mt-16 scroll-mt-28">
-              <SectionHeading
-                icon={MessageSquareQuote}
-                title="Peer feedback"
-                subtitle="What reviewers said, and what I did about it."
-              />
-
-              <ul className="space-y-4">
-                {feedback.map((item, index) => (
-                  <li key={`${item.reviewer}-${index}`} className="rounded-2xl glass p-5 sm:p-6">
-                    <figure>
-                      <blockquote className="border-l-2 border-primary/40 pl-4 text-base italic leading-relaxed text-foreground/90">
-                        {item.comment}
-                      </blockquote>
-                      <figcaption className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-                        <span className="font-medium text-foreground">{item.reviewer}</span>
-                        {item.date && (
-                          <>
-                            <span aria-hidden="true" className="text-muted-foreground">
-                              ·
-                            </span>
-                            <span>{item.date}</span>
-                          </>
-                        )}
-                      </figcaption>
-                    </figure>
-
-                    {item.response && (
-                      <div className="mt-4 border-t border-border/60 pt-4">
-                        <p className="mb-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
-                          What I did
-                        </p>
-                        <p className="text-sm leading-relaxed text-muted-foreground">
-                          {item.response}
-                        </p>
-                      </div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
 
           <nav
             aria-label="Continue"

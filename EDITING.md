@@ -148,8 +148,8 @@ Only change `heading`, `summary`, `body`, and the fields at the top. **Leave
 
 **File:** `src/content/documents.json`
 
-Each document needs three things, because your assignment grades all three:
-the file itself, how it changed, and what your reviewers said.
+Each document page shows one thing: the final file, with a download button,
+an "Open in new tab" link, and an inline preview.
 
 ### Swapping in your real CV
 
@@ -205,65 +205,16 @@ unfinished to anyone who opens it. Once you know where you are applying,
 replace each `[bracket]` in the HTML file with the real detail and run
 `npm run cover-letter` again.
 
-### Sections appear only when you fill them in
+### Peer review happens on paper, not on the site
 
-A document page can show three things: the file, **How it changed**, and
-**Peer feedback**. The last two are required by your assignment, but an empty
-heading looks worse than no heading — so each one **stays hidden until there is
-something real in it**.
-
-Fill in `revision_narrative`, `process_evidence`, or `peer_feedback` and the
-matching section appears on the page by itself. Empty them and it disappears
-again. There is no code to change either way.
-
-Your CV page is currently in that state: it shows the CV and nothing else. A
-draft of its revision story is parked in **`REVISION-DRAFTS.md`**, ready to
-paste back in when you want it.
-
-### Writing the revision story
-
-```json
-"revision_narrative": "<p>My first draft listed my duties. After feedback I rewrote every bullet point to show a result instead.</p>",
-"process_evidence": [
-  {
-    "label": "Draft 1",
-    "date": "Week 2",
-    "note": "Listed responsibilities with no numbers.",
-    "file_url": ""
-  },
-  {
-    "label": "Final",
-    "date": "Week 6",
-    "note": "Rewrote bullets around outcomes.",
-    "file_url": "/documents/thanh-vu-cv.pdf"
-  }
-]
-```
-
-Leave `file_url` as `""` if you do not have that draft saved as a file.
-
-### Adding peer feedback
-
-```json
-"peer_feedback": [
-  {
-    "reviewer": "Minh",
-    "date": "Week 3",
-    "comment": "The summary at the top was too general.",
-    "response": "I rewrote it to name the specific role I am applying for."
-  }
-]
-```
-
-To add a second reviewer, copy everything from `{` to `}`, put a **comma**
-after the first `}`, and paste:
-
-```json
-"peer_feedback": [
-  { "reviewer": "Minh", "comment": "...", "response": "..." },
-  { "reviewer": "Linh", "comment": "...", "response": "..." }
-]
-```
+Earlier versions of this site had a "How it changed" and "Peer feedback"
+section on every document page, plus a live form for classmates to submit
+comments. Both were removed: peer review for this course happens on paper
+handed out in class, so the on-site version was solving a problem that did
+not exist. If your assignment brief still asks for a written revision
+narrative and peer feedback, put that writing in your **Statement of
+Purpose** instead — the "Why these documents" section is the natural place
+for it.
 
 ---
 
